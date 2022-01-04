@@ -57,6 +57,17 @@ body {
     background-color: var(--cor-wrapper);
     margin: 20px auto;
 }
+.wrapper_menor{
+    min-height: 40%;
+    max-width: 40%;
+    background-color: var(--cor-wrapper);
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+}
+.wrapper_menor h2{
+    margin: 20px;
+}
 .footer{
     height: 30px;
     text-align: center;
