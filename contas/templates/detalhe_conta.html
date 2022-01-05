@@ -8,15 +8,25 @@
     <div class="grid_detalhe_conta">
         {% if receitas %}
         <a href="{% url 'receitas:cadastrar' conta.id %}">Cadastre uma receita clicando aqui</a>
-            {% for receita in receitas %}
-                <div class="receita_grid">
-                    <h3>{{receita.get_tipoReceita_display}}</h3>
-                    <p>{{receita.descricao}}</p>
-                    <p>{{receita.valor}}</p>
-                    <p>Recebida em: {{receita.dataRecebimento}}</p>
-                    <p>Esperado em: {{receita.dataRecebimentoEsperado}}</p>
-                </div>
-            {% endfor %}
+            <table class="receitas_despesas_conta">
+                <tr>
+                    <th>Tipo de Receita</th>
+                    <th>Descrição</th>
+                    <th>Data Recebimento</th>
+                    <th>Data Recebimento Esperado</th>
+                    <th>Valor</th>
+                </tr>
+                {% for receita in receitas %}
+                    <tr>
+                        <td><a href="#">{{receita.get_tipoReceita_display}}</a></td>
+                        <td><a href="#">{{receita.descricao_snippet}}</a></td>
+                        <td><a href="#">{{receita.dataRecebimento}}</a></td>
+                        <td><a href="#">{{receita.dataRecebimentoEsperado}}</a></td>
+                        <td><a href="#">{{receita.valor|floatformat:2}}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+
         {% else %}
             <h2>Nenhuma receita por enquanto</h2>
             <a href="{% url 'receitas:cadastrar' conta.id %}">Cadastre uma receita clicando aqui</a>
@@ -24,15 +34,22 @@
 
         {% if despesas %}
             <a href="{% url 'receitas:cadastrar' conta.id %}">Cadastre uma receita clicando aqui</a>
-            {% for despesa in despesas %}
-                <div class="despesa_grid">
-                    <h3>{{despesa.get_tipoDespesa_display}}</h3>
-                    <p>{{despesa.descricao}}</p>
-                    <p>{{despesa.valor}}</p>
-                    <p>Recebida em: {{despesa.dataRecebimento}}</p>
-                    <p>Esperado em: {{despesa.dataRecebimentoEsperado}}</p>
-                </div>
-            {% endfor %}
+            <table class="receitas_despesas_conta">
+                <tr>
+                    <th>Tipo de Despesa</th>
+                    <th>Data Recebimento</th>
+                    <th>Data Recebimento Esperado</th>
+                    <th>Valor</th>
+                </tr>
+                {% for despesa in despesas %}
+                    <tr>
+                        <td><a href="#">{{despesa.get_tipoDespesa_display}}</a></td>
+                        <td><a href="#">{{despesa.dataRecebimento}}</a></td>
+                        <td><a href="#">{{despesa.dataRecebimentoEsperado}}</a></td>
+                        <td><a href="#">{{despesa.valor|floatformat:2}}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
         {% else %}
             <h2>Nenhuma despesa por enquanto</h2>
             <a href="#">Cadastre uma despesa clicando aqui</a>
