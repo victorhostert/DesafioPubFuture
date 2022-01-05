@@ -8,14 +8,15 @@
         <h1>Escolha uma conta:</h1>
         {% for conta in contas %}
             <div class="contas_grid">
-                {{conta.instituicaoFinanceira}}
+                <p>Conta {{conta.tipoConta}}</p>
+                <p>Instituição: {{conta.instituicaoFinanceira}}</p>                
             </div>
         {% endfor %}
     </div>
 {% else %}
     <div class="wrapper_menor">
         <h2>Cadastre uma conta para iniciar</h2>
-        <a href="#">Cadastrar uma conta</a>
+        <a href="{% url 'contas:cadastrar' %}">Cadastrar uma conta</a>
     </div>
 {% endif %}
 {% endblock %}

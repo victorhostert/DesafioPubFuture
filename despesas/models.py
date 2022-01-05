@@ -5,14 +5,14 @@ from contas.models import Contas
 class Despesas(models.Model):
 
     opcoes_tipo_despesa = [
-        ('AL', 'alimentação'),
-        ('ED', 'educação'),
-        ('LA', 'lazer'),
-        ('MO', 'moradia'),
-        ('RO', 'roupa'),
-        ('SA', 'saúde'),
-        ('TR', 'transporte'),
-        ('OU', 'outros')
+        ('AL', 'Alimentação'),
+        ('ED', 'Educação'),
+        ('LA', 'Lazer'),
+        ('MO', 'Moradia'),
+        ('RO', 'Roupa'),
+        ('SA', 'Saúde'),
+        ('TR', 'Transporte'),
+        ('OU', 'Outros')
     ]
 
     valor = models.FloatField()
