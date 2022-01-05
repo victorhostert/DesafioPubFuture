@@ -5,4 +5,5 @@ app_name = 'despesas'
 
 urlpatterns = [
     path('cadastrar/<int:id>', views.cadastrar_despesa_view, name='cadastrar'),
+    path('<int:id>/', views.detalhe_despesa_view, name='detalhe'),
 ]

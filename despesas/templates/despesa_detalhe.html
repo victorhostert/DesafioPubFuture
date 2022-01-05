@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Administrador de Finanças{% endblock %}
+
+{% block 'conteudo' %}
+<div class="wrapper_menor">
+    <div class="despesa">
+        <h2>{{despesa.get_tipoDespesa_display}}</h2>
+        <p>Valor: {{despesa.valor}}</p>
+        <p>Recebido em {{despesa.dataRecebimento}}</p>
+        <p>Esperado o recebimento em {{despesa.dataRecebimentoEsperado}}</p>
+    </div>
+    <div class="update_delete">
+        <a href="#">Atualizar</a>
+        <a href="#">Excluir</a>
+    </div>
+</div>
+{% endblock %}

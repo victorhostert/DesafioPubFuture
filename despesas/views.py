@@ -1,6 +1,5 @@
-from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
-from django import forms
+from despesas.models import Despesas
 from .forms import CriarDespesaForm
 from contas.models import Contas
 
@@ -21,3 +20,7 @@ def cadastrar_despesa_view(request, id):
         form = CriarDespesaForm()
 
     return render(request, 'cadastrar_despesa.html', {'form': form, 'conta': conta})
+
+def detalhe_despesa_view(request, id):
+    despesa = Despesas.objects.get(id=id)
+    return render(request, 'despesa_detalhe.html', {'despesa': despesa})
