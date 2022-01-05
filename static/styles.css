@@ -106,7 +106,10 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
-    border: 1px solid red;
+    gap: 5px;
+}
+.grid_detalhe_conta *{
+    margin: 0 auto;
 }
 .footer{
     height: 30px;
