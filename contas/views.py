@@ -1,9 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 from .models import Contas
 from despesas.models import Despesas
 from receitas.models import Receitas
-from .forms import CriarContaForm
+from .forms import CriarContaForm, TransferenciaForm
 
 def paginator(request, object, number):
     paginator = Paginator(object, number)
@@ -40,3 +40,21 @@ def criar_conta_view(request):
         'form': form,
     }
     return render(request, 'cadastro_conta.html', context)
+
+def transferencia_conta_view(request):
+    if request.method == 'POST':
+        form = TransferenciaForm(request.POST)
+        if form.is_valid():
+            conta1_id = form.cleaned_data['conta1']
+            conta1 = get_object_or_404(Contas, id=conta1_id)
+            conta2_id = form.cleaned_data['conta2']
+            conta2 = get_object_or_404(Contas, id=conta2_id)
+            valor = form.cleaned_data['valor']
+            conta1.saldo -= valor
+            conta2.saldo += valor
+            conta1.save()
+            conta2.save()
+            return redirect('homepage')
+    else:
+        form = TransferenciaForm()
+    return render(request, 'transferencia.html', {'form': form})
