@@ -5,19 +5,19 @@ from contas.models import Contas
 class Despesas(models.Model):
 
     opcoes_tipo_despesa = [
-        ('AL', 'alimentação'),
-        ('ED', 'educação'),
-        ('LA', 'lazer'),
-        ('MO', 'moradia'),
-        ('RO', 'roupa'),
-        ('SA', 'saúde'),
-        ('TR', 'transporte'),
-        ('OU', 'outros')
+        ('AL', 'Alimentação'),
+        ('ED', 'Educação'),
+        ('LA', 'Lazer'),
+        ('MO', 'Moradia'),
+        ('RO', 'Roupa'),
+        ('SA', 'Saúde'),
+        ('TR', 'Transporte'),
+        ('OU', 'Outros')
     ]
 
     valor = models.FloatField()
-    dataRecebimento = models.DateField()
-    dataRecebimentoEsperado = models.DateField()
-    descricao = models.CharField(max_length=500, verbose_name='descrição')
+    dataRecebimento = models.DateField(verbose_name='Data recebimento')
+    dataRecebimentoEsperado = models.DateField(verbose_name='Data recebimento esperado')
+    descricao = models.CharField(max_length=500, verbose_name='Descrição')
     conta = models.ForeignKey(Contas, on_delete=CASCADE)
-    tipoDespesa = models.CharField(max_length=2, choices=opcoes_tipo_despesa)
+    tipoDespesa = models.CharField(max_length=2, choices=opcoes_tipo_despesa, verbose_name='Tipo')
