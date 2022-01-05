@@ -4,7 +4,7 @@
 
 {% block 'conteudo' %}
 <div class="wrapper">
-    <h1>{{conta.tipo_conta_descricao}}</h1>
+    <h1>{{conta.get_tipoConta_display}}</h1>
     <div class="grid_detalhe_conta">
         {% if receitas %}
         <a href="{% url 'receitas:cadastrar' conta.id %}">Cadastre uma receita clicando aqui</a>
@@ -33,7 +33,7 @@
         {% endif %}
 
         {% if despesas %}
-            <a href="{% url 'receitas:cadastrar' conta.id %}">Cadastre uma receita clicando aqui</a>
+            <a href="{% url 'despesas:cadastrar' conta.id %}">Cadastre uma despesa clicando aqui</a>
             <table class="receitas_despesas_conta">
                 <tr>
                     <th>Tipo de Despesa</th>
@@ -52,7 +52,7 @@
             </table>
         {% else %}
             <h2>Nenhuma despesa por enquanto</h2>
-            <a href="#">Cadastre uma despesa clicando aqui</a>
+            <a href="{% url 'despesas:cadastrar' conta.id %}">Cadastre uma despesa clicando aqui</a>
         {% endif %}
     </div>
 </div>

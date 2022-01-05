@@ -12,7 +12,7 @@ class Receitas(models.Model):
         ('OU', 'Outros')
     ]
 
-    valor = models.FloatField(verbose_name='Valor')
+    valor = models.FloatField()
     dataRecebimento = models.DateField(verbose_name='Data recebimento')
     dataRecebimentoEsperado = models.DateField(verbose_name='Data esperada para recebimento')
     descricao = models.CharField(max_length=500, verbose_name='Descrição')

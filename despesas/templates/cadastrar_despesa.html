@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Administrador de Finanças{% endblock %}
+
+{% block 'conteudo' %}
+<div class="formulario">
+    <h2>Cadastrar uma nova despesa:</h2>
+    <form action="{% url 'despesas:cadastrar' conta.id %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Cadastrar despesa</button>
+    </form>
+</div>
+{% endblock %}

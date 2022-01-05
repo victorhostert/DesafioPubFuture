@@ -11,10 +11,8 @@ def cadastrar_receita_view(request, id):
             instance.conta = conta
             conta.saldo += instance.valor
             conta.save()
-            form.save()
+            instance.save()
             return redirect('contas:detalhes', id=id)
-        else:
-            print('eita nois')
     else:
         form = CriarReceitaForm()
 
