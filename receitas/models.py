@@ -16,5 +16,5 @@ class Receitas(models.Model):
     dataRecebimento = models.DateField(verbose_name='Data recebimento')
     dataRecebimentoEsperado = models.DateField(verbose_name='Data esperada para recebimento')
     descricao = models.CharField(max_length=500, verbose_name='Descrição')
-    conta = models.ForeignKey(Contas, on_delete=CASCADE)
+    conta = models.ForeignKey(Contas, on_delete=CASCADE, default=None)
     tipoReceita = models.CharField(max_length=50, choices=opcoes_tipo_receita, verbose_name='Tipo')
