@@ -12,8 +12,8 @@
         <p>Esperado o recebimento em {{receita.dataRecebimentoEsperado}}</p>
     </div>
     <div class="update_delete">
-        <a href="#">Atualizar</a>
-        <a href="#">Excluir</a>
+        <a href="{% url 'receitas:atualizar' receita.id %}">Atualizar</a>
+        <a href="{% url 'receitas:deletar' receita.id %}">Excluir</a>
     </div>
 </div>
 {% endblock %}

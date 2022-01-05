@@ -22,3 +22,28 @@ def cadastrar_receita_view(request, id):
 def detalhe_receita_view(request, id):
     receita = Receitas.objects.get(id=id)
     return render(request, 'receita_detalhe.html', {'receita': receita})
+
+def atualizar_receita_view(request, id):
+    receita = Receitas.objects.get(id=id)
+    conta = receita.conta
+    if request.method == 'POST':
+        conta.saldo -= receita.valor
+        form = CriarReceitaForm(request.POST, instance=receita)
+        form.conta = conta
+        if form.is_valid():
+            conta.saldo -= form.cleaned_data['valor']
+            conta.save()
+            form.save()
+            return redirect('receitas:detalhe', receita.id)
+    else:
+        form = CriarReceitaForm(instance=receita)
+
+    return render(request, 'atualizar_receita.html', {'form': form, 'conta': conta, 'receita': receita})
+
+def deletar_receita_view(request, id):
+    receita = Receitas.objects.get(id=id)
+    conta = receita.conta
+    conta.saldo -= receita.valor
+    conta.save()
+    receita.delete()
+    return redirect('contas:detalhes', id=conta.id)

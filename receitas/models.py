@@ -21,8 +21,8 @@ class Receitas(models.Model):
 
 
     def descricao_snippet(self):
-        if len(self.descricao) > 50:
-            return self.descricao[:50] + '...'
+        if len(self.descricao) > 30:
+            return self.descricao[:30] + '...'
         else:
             return self.descricao
         
