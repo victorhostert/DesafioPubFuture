@@ -4,6 +4,7 @@ from .models import Contas
 from despesas.models import Despesas
 from receitas.models import Receitas
 from .forms import CriarContaForm, TransferenciaForm
+from datetime import date
 
 def paginator(request, object, number):
     paginator = Paginator(object, number)
@@ -52,6 +53,21 @@ def transferencia_conta_view(request):
             valor = form.cleaned_data['valor']
             conta1.saldo -= valor
             conta2.saldo += valor
+            Receitas.objects.create(
+                dataRecebimento=date.today(),
+                dataRecebimentoEsperado=date.today(),
+                valor = valor,
+                descricao = f'Transferência vinda de {conta1}',
+                tipoReceita = 'OU',
+                conta=conta2
+            )
+            Despesas.objects.create(
+                dataRecebimento=date.today(),
+                dataRecebimentoEsperado=date.today(),
+                valor = valor,
+                tipoDespesa = 'OU',
+                conta=conta1
+            )
             conta1.save()
             conta2.save()
             return redirect('homepage')
