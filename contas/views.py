@@ -17,8 +17,8 @@ def paginator(request, object, number):
 
 def detalhes_view(request, id):
     conta = Contas.objects.get(id=id)
-    despesas = Despesas.objects.filter(conta=conta)
-    receitas = Receitas.objects.filter(conta=conta)
+    despesas = Despesas.objects.filter(conta=conta).order_by('dataRecebimento')
+    receitas = Receitas.objects.filter(conta=conta).order_by('dataRecebimento')
     pag_despesas = paginator(request, despesas, 10)
     pag_receitas = paginator(request, receitas, 10)
     context = {
