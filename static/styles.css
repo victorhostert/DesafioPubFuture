@@ -102,7 +102,12 @@ body {
     padding: 5px;
     color: black;
 }
-
+.grid_detalhe_conta{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    border: 1px solid red;
+}
 .footer{
     height: 30px;
     text-align: center;
