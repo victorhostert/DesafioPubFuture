@@ -44,6 +44,7 @@ body {
     min-height: 100%;
     letter-spacing: 2px;
     margin-inline: 5px;
+    line-height: 25px;
 }
 .header *{
     display: inline-block;
@@ -68,6 +69,18 @@ body {
 }
 .wrapper_menor h2{
     margin: 20px;
+}
+.contas_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+    margin: 20px;
+}
+.conta_grid{
+    background-color: #f2f2f2;
+    color: black;
+    padding: 20px;
 }
 .footer{
     height: 30px;

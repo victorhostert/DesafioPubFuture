@@ -9,7 +9,7 @@
         <div class="contas_grid">
             {% for conta in contas %}
                 <div class="conta_grid">
-                    <p>Conta {{conta.tipoConta}}</p>
+                    <p>{{conta.tipo_conta_descricao}}</p>
                     <p>Instituição: {{conta.instituicaoFinanceira}}</p>
                 </div>                
             {% endfor %}
