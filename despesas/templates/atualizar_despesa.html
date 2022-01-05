@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Administrador de Finanças{% endblock %}
+
+{% block 'conteudo' %}
+<div class="formulario">
+    <h2>Atualizar uma despesa:</h2>
+    <form action="{% url 'despesas:atualizar' despesa.id %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Atualizar</button>
+    </form>
+</div>
+{% endblock %}

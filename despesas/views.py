@@ -24,3 +24,28 @@ def cadastrar_despesa_view(request, id):
 def detalhe_despesa_view(request, id):
     despesa = Despesas.objects.get(id=id)
     return render(request, 'despesa_detalhe.html', {'despesa': despesa})
+
+def atualizar_despesa_view(request, id):
+    despesa = Despesas.objects.get(id=id)
+    conta = despesa.conta
+    if request.method == 'POST':
+        conta.saldo += despesa.valor
+        form = CriarDespesaForm(request.POST, instance=despesa)
+        form.conta = conta
+        if form.is_valid():
+            conta.saldo -= form.cleaned_data['valor']
+            conta.save()
+            form.save()
+            return redirect('despesas:detalhe', despesa.id)
+    else:
+        form = CriarDespesaForm(instance=despesa)
+
+    return render(request, 'atualizar_despesa.html', {'form': form, 'conta': conta, 'despesa': despesa})
+
+def deletar_despesa_view(request, id):
+    despesa = Despesas.objects.get(id=id)
+    conta = despesa.conta
+    conta.saldo += despesa.valor
+    conta.save()
+    despesa.delete()
+    return redirect('contas:detalhes', id=conta.id)

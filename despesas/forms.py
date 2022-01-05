@@ -24,5 +24,4 @@ class CriarDespesaForm(forms.ModelForm):
         saldo = conta.saldo
         if valor > saldo:
             raise forms.ValidationError('O valor da despesa é superior ao saldo disponível')
-
         return valor
