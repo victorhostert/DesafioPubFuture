@@ -9,8 +9,10 @@
         <div class="contas_grid">
             {% for conta in contas %}
                 <div class="conta_grid">
-                    <p>{{conta.tipo_conta_descricao}}</p>
-                    <p>Instituição: {{conta.instituicaoFinanceira}}</p>
+                    <a href="{% url 'contas:detalhes' conta.id %}">
+                        <p>{{conta.tipo_conta_descricao}}</p>
+                        <p>Instituição: {{conta.instituicaoFinanceira}}</p>
+                    </a>
                 </div>                
             {% endfor %}
         </div>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Administrador de Finanças{% endblock %}
+
+{% block 'conteudo' %}
+<div class="wrapper_menor">
+    <h1>{{conta.tipo_conta_descricao}}</h1>
+    <div class="grid_detalhe_conta">
+        {% if receitas %}
+            {% for receita in receitas %}
+                <div class="receita_grid">
+                    <h3>{{receita.tipoReceita}}</h3>
+                    <p>{{receita.descricao}}</p>
+                    <p>{{receita.valor}}</p>
+                    <p>Recebida em: {{receita.dataRecebimento}}</p>
+                    <p>Esperado em: {{receita.dataRecebimentoEsperado}}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h2>Nenhuma receita por enquanto</h2>
+            <a href="#">Cadastre uma receita clicando aqui</a>
+        {% endif %}
+
+        {% if despesas %}
+            <div class="despesa_grid">
+                <h3>{{despesa.tipoDespesa}}</h3>
+                <p>{{despesa.descricao}}</p>
+                <p>{{despesa.valor}}</p>
+                <p>Recebida em: {{despesa.dataRecebimento}}</p>
+                <p>Esperado em: {{despesa.dataRecebimentoEsperado}}</p>
+            </div>
+        {% else %}
+            <h2>Nenhuma despesa por enquanto</h2>
+            <a href="#">Cadastre uma despesa clicando aqui</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
