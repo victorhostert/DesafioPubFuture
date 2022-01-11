@@ -6,6 +6,7 @@ from contas.models import Contas
 class Receitas(models.Model):
 
     opcoes_tipo_receita = [
+        ('', '--------'),
         ('SA', 'Salário'),
         ('PS', 'Presente'),
         ('PM', 'Prêmio'),

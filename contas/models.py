@@ -3,6 +3,7 @@ from django.db import models
 class Contas(models.Model):
 
     opcoes_tipo_conta = [
+        ('', '--------'),
         ('CA', 'Carteira'),
         ('CC', 'Conta Corrente'),
         ('PO', 'Poupança')

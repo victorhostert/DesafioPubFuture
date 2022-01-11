@@ -5,6 +5,7 @@ from contas.models import Contas
 class Despesas(models.Model):
 
     opcoes_tipo_despesa = [
+        ('', '--------'),
         ('AL', 'Alimentação'),
         ('ED', 'Educação'),
         ('LA', 'Lazer'),
