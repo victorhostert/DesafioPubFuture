@@ -7,7 +7,7 @@
     <h2>Cadastrar uma nova receita:</h2>
     <form action="{% url 'receitas:cadastrar' conta.id %}" method="post">
         {% csrf_token %}
-        {{form}}
+        {{form.as_p}}
         <button type="submit">Cadastrar receita</button>
     </form>
 </div>

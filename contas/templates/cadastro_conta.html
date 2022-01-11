@@ -3,12 +3,14 @@
 {% block 'titulo' %}Administrador de Finanças{% endblock %}
 
 {% block 'conteudo' %}
-<div class="formulario">
-    <h2>Cadastrar uma nova conta:</h2>
-    <form action="{% url 'contas:cadastrar' %}" method="post">
-        {% csrf_token %}
-        {{form}}
-        <button type="submit">Cadastrar conta</button>
-    </form>
+<div class="wrapper_menor">
+    <div class="formulario">
+        <h2>Cadastrar uma nova conta:</h2>
+        <form action="{% url 'contas:cadastrar' %}" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Cadastrar conta</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
