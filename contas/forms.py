@@ -1,5 +1,5 @@
 from django import forms
-from django.shortcuts import get_object_or_404
+from django.db.utils import OperationalError
 from .models import Contas
 
 class CriarContaForm(forms.ModelForm):
@@ -9,7 +9,11 @@ class CriarContaForm(forms.ModelForm):
 
 
 class TransferenciaForm(forms.Form):
-    contas = tuple(Contas.objects.all())
+    try:
+        contas = tuple(Contas.objects.all())
+    except OperationalError:
+        contas = []
+
     opcoes_contas = []
     for conta in contas:
         opcao = (conta.id, conta)
@@ -33,3 +37,9 @@ class TransferenciaForm(forms.Form):
         if conta.saldo < valor:
             raise forms.ValidationError('O saldo da conta a ser debitada é muito baixo para este valor!')
         return valor
+
+class FiltrarContaForm(forms.Form):
+    saldo_min = forms.FloatField(required=False)
+    saldo_max = forms.FloatField(required=False)
+    tipoConta = forms.ChoiceField(required=False, choices=Contas.opcoes_tipo_conta)
+    instituicaoFinanceira = forms.CharField(required=False, max_length=255)
