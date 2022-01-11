@@ -42,6 +42,30 @@ def criar_conta_view(request):
     }
     return render(request, 'cadastro_conta.html', context)
 
+def atualizar_conta_view(request, id):
+    conta = Contas.objects.get(id=id)
+    if request.method == 'POST':
+        form = CriarContaForm(request.POST, instance=conta)
+        if form.is_valid():
+            form.save()
+            return redirect('homepage')
+    else:
+        form = CriarContaForm(instance=conta)
+    context = {
+        'form': form,
+        'conta': conta
+    }
+    return render(request, 'atualizar_conta.html', context)
+
+def deletar_conta_view(request, id):
+    conta = Contas.objects.get(id=id)
+    if request.method == "POST":
+        conta.delete()
+        return redirect('homepage')
+    else:
+        return render(request, 'deletar_conta.html', {'conta': conta})
+
+
 def transferencia_conta_view(request):
     if request.method == 'POST':
         form = TransferenciaForm(request.POST)

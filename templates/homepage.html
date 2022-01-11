@@ -13,6 +13,11 @@
                         <p>{{conta.get_tipoConta_display}}</p>
                         <p>Instituição: {{conta.instituicaoFinanceira}}</p>
                         <p>Saldo: {{conta.saldo}}</p>
+                        <hr>
+                        <div class="update_delete_conta">
+                            <a href="{% url 'contas:atualizar' conta.id %}">Atualizar esta conta</a>
+                            <a href="{% url 'contas:deletar' conta.id %}">Deletar esta conta</a>
+                        </div>
                     </a>
                 </div>                
             {% endfor %}

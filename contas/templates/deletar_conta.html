@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Administrador de Finanças{% endblock %}
+
+{% block 'conteudo' %}
+<div class="formulario">
+    <h2>Deseja mesmo deletar esta conta?</h2>
+    <form action="{% url 'contas:deletar' conta.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Sim</button>
+    </form>
+    <button><a href="{% url 'homepage' %}">Não</a></button>
+</div>
+{% endblock %}
