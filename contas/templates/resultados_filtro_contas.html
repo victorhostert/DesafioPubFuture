@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Administrador de Finanças{% endblock %}
+
+{% block 'conteudo' %}
+<div class="wrapper_menor">
+    {% if contas %}
+        <h1>Resultados da pesquisa:</h1>
+        <div class="contas_grid">
+            {% for conta in contas %}
+            <div class="conta_grid">
+                <a href="{% url 'contas:detalhes' conta.id %}">
+                    <p>{{conta.get_tipoConta_display}}</p>
+                    <p>Instituição: {{conta.instituicaoFinanceira}}</p>
+                    <p>Saldo: {{conta.saldo}}</p>
+                    <hr>
+                    <div class="update_delete_conta">
+                        <a href="{% url 'contas:atualizar' conta.id %}">Atualizar esta conta</a>
+                        <a href="{% url 'contas:deletar' conta.id %}">Deletar esta conta</a>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'contas:filtrar' %}">Fazer outra pesquisa</a>   
+    {% else %}
+        <h1>Sua pesquisa não gerou resultados</h1>
+        <a href="{% url 'contas:filtrar' %}">Clique aqui para pesquisar por outros termos</a>
+    {% endif %}
+</div>
+{% endblock %}

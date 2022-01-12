@@ -1,4 +1,5 @@
 from django import forms
+from django.db.models.fields import TextField
 from django.db.utils import OperationalError
 from .models import Contas
 
@@ -39,7 +40,7 @@ class TransferenciaForm(forms.Form):
         return valor
 
 class FiltrarContaForm(forms.Form):
-    saldo_min = forms.FloatField(required=False)
-    saldo_max = forms.FloatField(required=False)
-    tipoConta = forms.ChoiceField(required=False, choices=Contas.opcoes_tipo_conta)
-    instituicaoFinanceira = forms.CharField(required=False, max_length=255)
+    saldo_min = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor mínimo"}))
+    saldo_max = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor máximo"}))
+    tipoConta = forms.ChoiceField(required=False, choices=Contas.opcoes_tipo_conta, label="Tipo da conta")
+    instituicaoFinanceira = forms.CharField(required=False, max_length=255, label="Instituição Financeira")

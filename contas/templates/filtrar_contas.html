@@ -6,8 +6,27 @@
 <div class="wrapper_menor">
     <h1>Filtrar contas</h1>
     <form action="{% url 'contas:filtrar' %}" method="post">
-        {{form.as_p}}
-        <button type="submit">Filtrar</button>
+        {% csrf_token %}
+        {% if form.errors %}
+            <ul class="errors">
+                {% for error in form.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field.name != "saldo_min" and field.name != "saldo_max" %}
+                <label>{{ field.label }}</label>
+                {{ field }}
+            {% endif %}
+        {% endfor %}
+        <div class="saldo_field">
+            <p>Salário</p>
+            {{ form.saldo_min }} - {{ form.saldo_max }}
+        </div>
+        <button type="submit">Pesquisar</button>
     </form>
 </div>
 {% endblock %}

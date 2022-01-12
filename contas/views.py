@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from .models import Contas
 from despesas.models import Despesas
 from receitas.models import Receitas
-from .forms import CriarContaForm, TransferenciaForm
+from .forms import CriarContaForm, TransferenciaForm, FiltrarContaForm
 from datetime import date
 
 def paginator(request, object, number):
@@ -15,8 +15,28 @@ def paginator(request, object, number):
         page_obj = None
     return page_obj
 
+def pesquisar_contas(request):
+    contas = Contas.objects.all()    
+    saldo_min = request.POST.get('saldo_min')
+    saldo_max = request.POST.get('saldo_max')
+    tipo_conta = request.POST.get('tipoConta')
+    inst_financeira = request.POST.get('instituicaoFinanceira')
+    resultado_filtro = None
 
-def detalhes_view(request, id):
+    if saldo_min == '':
+        saldo_min = 0
+    if saldo_max == '':
+        saldo_max = 9999999.99
+    resultado_filtro = contas.filter(saldo__gte=saldo_min, saldo__lte=saldo_max)
+    
+    if tipo_conta and tipo_conta != '':
+        resultado_filtro = contas.filter(tipoConta__iexact=tipo_conta)
+    if inst_financeira and inst_financeira != '':
+        resultado_filtro = contas.filter(instituicaoFinanceira__icontains=inst_financeira)
+
+    return resultado_filtro
+
+def detalhes_conta_view(request, id):
     conta = Contas.objects.get(id=id)
     despesas = Despesas.objects.filter(conta=conta).order_by('dataRecebimento')
     receitas = Receitas.objects.filter(conta=conta).order_by('dataRecebimento')
@@ -98,3 +118,13 @@ def transferencia_conta_view(request):
     else:
         form = TransferenciaForm()
     return render(request, 'transferencia.html', {'form': form})
+
+
+def filtrar_contas_view(request):
+    if request.method == 'POST':
+        form = FiltrarContaForm(request.POST)
+        contas = pesquisar_contas(request)
+        return render(request, 'resultados_filtro_contas.html', {'form': form, 'contas': contas})
+    else:
+        form = FiltrarContaForm()
+    return render(request, 'filtrar_contas.html', {'form': form})
