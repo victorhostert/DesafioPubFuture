@@ -6,6 +6,8 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class CriarReceitaForm(forms.ModelForm):
+    required_css_class = 'obrigatorio'
+    
     class Meta:
         model = Receitas
         fields = [

@@ -4,12 +4,16 @@ from django.db.utils import OperationalError
 from .models import Contas
 
 class CriarContaForm(forms.ModelForm):
+    required_css_class = 'obrigatorio'
+    
     class Meta:
         model = Contas
         fields = '__all__'
 
 
 class TransferenciaForm(forms.Form):
+    required_css_class = 'obrigatorio'
+    
     try:
         contas = tuple(Contas.objects.all())
     except OperationalError:

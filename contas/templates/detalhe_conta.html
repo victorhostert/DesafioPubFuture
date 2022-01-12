@@ -4,12 +4,15 @@
 
 {% block 'conteudo' %}
 <div class="wrapper">
-    <h1>{{conta.get_tipoConta_display}}</h1>
+    <h1>Conta: {{conta.get_tipoConta_display}}</h1>
+    <h2>Saldo: R$ {{conta.saldo|floatformat:2}}</h2>
     <div class="grid_detalhe_conta">
         {% if receitas %}
         <div class="receitas_despesas_conta">
             <table>
-                <h3>Receitas</h3>
+                <div class="tabela_titulo">
+                    <h2>Receitas</h2>
+                </div>
                 <tr>
                     <th>Tipo de Receita</th>
                     <th>Descrição</th>
@@ -28,7 +31,6 @@
                 {% endfor %}
             </table>
 
-            <a href="{% url 'receitas:cadastrar' conta.id %}">Cadastrar uma receita</a>
             
             <div class="pagination">
                 {% if receitas.has_previous %}
@@ -45,6 +47,9 @@
                 <a href="?page={{ receitas.paginator.num_pages }}">Última &raquo;</a>
                 {% endif %}
             </div>
+            <div class="cadastro_receita_despesa">
+                <a style="color: white;" href="{% url 'receitas:cadastrar' conta.id %}">Cadastrar uma receita</a>
+            </div>
         </div>
         
         {% else %}
@@ -57,7 +62,9 @@
         {% if despesas %}
             <div class="receitas_despesas_conta">
                 <table>
-                    <h3>Despesas</h3>
+                    <div class="tabela_titulo">
+                        <h2>Despesas</h2>
+                    </div>
                     <tr>
                         <th>Tipo de Despesa</th>
                         <th>Data Recebimento</th>
@@ -74,7 +81,6 @@
                     {% endfor %}
                 </table>
 
-                <a href="{% url 'despesas:cadastrar' conta.id %}">Cadastrar uma despesa</a>
 
                 <div class="pagination">
                     {% if receitas.has_previous %}
@@ -90,6 +96,10 @@
                         <a href="?page={{ receitas.next_page_number }}">Próxima</a>
                         <a href="?page={{ receitas.paginator.num_pages }}">Última &raquo;</a>
                     {% endif %}
+                </div>
+
+                <div class="cadastro_receita_despesa">
+                    <a style="color: white;"  href="{% url 'despesas:cadastrar' conta.id %}">Cadastrar uma despesa</a>    
                 </div>
             </div>
 

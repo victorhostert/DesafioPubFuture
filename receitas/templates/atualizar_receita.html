@@ -3,12 +3,14 @@
 {% block 'titulo' %}Administrador de Finanças{% endblock %}
 
 {% block 'conteudo' %}
-<div class="formulario">
-    <h2>Atualizar uma receita:</h2>
-    <form action="{% url 'receitas:atualizar' receita.id %}" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Atualizar</button>
-    </form>
+<div class="wrapper_menor">
+    <div class="formulario">
+        <h2>Atualizar uma receita:</h2>
+        <form action="{% url 'receitas:atualizar' receita.id %}" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Atualizar</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

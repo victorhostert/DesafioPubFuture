@@ -5,6 +5,8 @@ class DateInput(forms.DateInput):
     input_type = 'date'
 
 class CriarDespesaForm(forms.ModelForm):
+    required_css_class = 'obrigatorio'
+    
     class Meta:
         model = Despesas
         fields = [
