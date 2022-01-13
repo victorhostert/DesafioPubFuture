@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <link rel="icon" href="https://freepngimg.com/thumb/money/64045-money-symbol-dollar-sign-green-transparent-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <title>{% block 'titulo' %}{% endblock %}</title>
@@ -20,9 +21,14 @@
             <ul>
                 <li><a href="{% url 'contas:cadastrar' %}">Cadastrar nova conta</a></li>
                 <li><a href="{% url 'contas:transferencia' %}">Transferência entre contas</a></li>
-                <li><a href="{% url 'contas:filtrar' %}">Pesquisar por uma conta</a></li>
-                <li><a href="#">Receitas</a></li>
-                <li><a href="#">Despesas</a></li>
+                <li class="dropbtn" onclick="myFunction()">Filtrar
+                    <i class="fa fa-caret-down"></i>
+                </li>
+                <div class="dropdown-content" id="dropdown_list">
+                    <li><a href="{% url 'contas:filtrar' %}">Contas</a></li>
+                    <li><a href="#">Receitas</a></li>
+                    <li><a href="#">Despesas</a></li>
+                </div>
             </ul>
         </nav>
     </header>
@@ -53,5 +59,23 @@
                 <li></li>
         </ul>
     </div >
+    
+<script>
+    /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("dropdown_list").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+</script>
 </body>
 </html>
