@@ -45,17 +45,18 @@
                 <a href="?page={{ receitas.paginator.num_pages }}">Última &raquo;</a>
                 {% endif %}
             </div>
-            <div class="cadastro_receita_despesa">
-                <a style="color: white;" href="{% url 'receitas:cadastrar' conta.id %}">Cadastrar uma receita</a>
-            </div>
         </div>
-        
         {% else %}
-            <div class="cadastro_despesa_receita">
-                <h2>Nenhuma receita por enquanto</h2>
-                <a href="{% url 'receitas:cadastrar' conta.id %}">Cadastre uma receita clicando aqui</a>
-            </div>
+        <div class="cadastro_despesa_receita">
+            <h2>Nenhuma receita por enquanto</h2>
+        </div>
         {% endif %}
+        <div class="botao_cadastro">
+            <button><a href="{% url 'receitas:cadastrar' conta.id %}">Cadastrar uma receita</a></button>
+        </div>
+
+        <hr style="margin-top: 20px;">
+
         {% if despesas %}
             <div class="receitas_despesas_conta">
                 <table>
@@ -95,17 +96,16 @@
                     {% endif %}
                 </div>
 
-                <div class="cadastro_receita_despesa">
-                    <a style="color: white;"  href="{% url 'despesas:cadastrar' conta.id %}">Cadastrar uma despesa</a>    
-                </div>
             </div>
-
-        {% else %}
+            
+            {% else %}
             <div class="cadastro_despesa_receita">
                 <h2>Nenhuma despesa por enquanto</h2>
-                <a href="{% url 'despesas:cadastrar' conta.id %}">Cadastre uma despesa clicando aqui</a>    
             </div>
-        {% endif %}
+            {% endif %}
+            <div class="botao_cadastro">
+                <button><a href="{% url 'despesas:cadastrar' conta.id %}">Cadastrar uma despesa</a></button>
+            </div>
     </div>
 </div>
 {% endblock %}

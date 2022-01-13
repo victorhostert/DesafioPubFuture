@@ -6,15 +6,15 @@
     padding: 0;
     box-sizing: border-box;
 }
-a {
-    text-decoration: none;
-    color: inherit;
-}
 :root {
     --cor-bg-escuro: #0E0E0E;
     --cor-bg-claro: #0F684C;
     --cor-header-footer: #101010;
     --cor-links: #191A21;
+}
+a {
+    text-decoration: none;
+    color: inherit;
 }
 body {
     background: rgb(63,94,251);
@@ -39,6 +39,13 @@ table th:last-child {
 }
 table th:first-child{
     border-top-left-radius: 10px;
+}
+button{
+    padding: 20px;
+    border-radius: 20px;
+}
+button:hover{
+    cursor: pointer;
 }
 .header{
     height: 50px;
@@ -149,7 +156,7 @@ table th:first-child{
     max-width: 80%;
 }
 .pagination{
-    margin: 0 auto;
+    margin: 20px auto;
     width: fit-content;
 }
 .saldo_total{
@@ -201,10 +208,47 @@ table th:first-child{
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
-    max-width: 50%;
+    max-width: fit-content;
 }
-.cadastro_despesa_receita *{
+.botao_cadastro{
+    display: flex;
+}
+.botao_cadastro button{
+    align-self: center;
+    width: 40%;
     margin: 0 auto;
+}
+.botao_cadastro a{
+    display: block;     
+    position: relative;    
+    z-index: 1;     
+    padding: 2em;     
+    margin: -2em;
+}
+.despesa,
+.receita{
+    background-color: #F2F2F2;
+    color: var(--cor-links);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding: 5px;
+    width: 50%;
+    margin: 80px auto;
+}
+.despesa *,
+.receita *{
+    padding: 20px;
+    text-align: center;
+}
+.atualizar_excluir{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 .errorlist{
     color: tomato;
