@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Administrador de Finanças{% endblock %}
+
+{% block 'conteudo' %}
+<div class="wrapper">
+    <div class="formulario">
+        <h2>Deseja mesmo deletar esta receita?</h2>
+        <span>{{ receita.get_tipoReceita_display }} - R$ {{receita.valor|floatformat:2}}</span>
+        <div class="deletar_receita">
+            <form action="{% url 'receitas:deletar' receita.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Sim</button>
+            </form>
+            <button><a href="{% url 'homepage' %}">Não</a></button>
+        </div>
+    </div>
+</div>
+{% endblock %}

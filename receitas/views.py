@@ -42,8 +42,11 @@ def atualizar_receita_view(request, id):
 
 def deletar_receita_view(request, id):
     receita = Receitas.objects.get(id=id)
-    conta = receita.conta
-    conta.saldo -= receita.valor
-    conta.save()
-    receita.delete()
-    return redirect('contas:detalhes', id=conta.id)
+    if request.method == 'POST':
+        conta = receita.conta
+        conta.saldo -= receita.valor
+        conta.save()
+        receita.delete()
+        return redirect('contas:detalhes', id=conta.id)
+    else:
+        return render(request, 'deletar_receita.html', {'receita': receita})

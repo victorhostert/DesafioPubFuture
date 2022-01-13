@@ -44,8 +44,11 @@ def atualizar_despesa_view(request, id):
 
 def deletar_despesa_view(request, id):
     despesa = Despesas.objects.get(id=id)
-    conta = despesa.conta
-    conta.saldo += despesa.valor
-    conta.save()
-    despesa.delete()
-    return redirect('contas:detalhes', id=conta.id)
+    if request.method == 'POST':
+        conta = despesa.conta
+        conta.saldo -= despesa.valor
+        conta.save()
+        despesa.delete()
+        return redirect('contas:detalhes', id=conta.id)
+    else:
+        return render(request, 'deletar_despesa.html', {'despesa': despesa})
