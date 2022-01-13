@@ -19,11 +19,4 @@ class Receitas(models.Model):
     descricao = models.CharField(max_length=500, verbose_name='Descrição')
     conta = models.ForeignKey(Contas, on_delete=CASCADE, default=None)
     tipoReceita = models.CharField(max_length=50, choices=opcoes_tipo_receita, verbose_name='Tipo')
-
-
-    def descricao_snippet(self):
-        if len(self.descricao) > 30:
-            return self.descricao[:30] + '...'
-        else:
-            return self.descricao
         

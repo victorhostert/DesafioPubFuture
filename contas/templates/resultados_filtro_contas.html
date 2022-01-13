@@ -3,7 +3,7 @@
 {% block 'titulo' %}Administrador de Finanças{% endblock %}
 
 {% block 'conteudo' %}
-<div class="wrapper_menor">
+<div class="wrapper">
     {% if contas %}
         <h1>Resultados da pesquisa:</h1>
         <div class="contas_grid">
@@ -12,7 +12,7 @@
                 <a href="{% url 'contas:detalhes' conta.id %}">
                     <p>{{conta.get_tipoConta_display}}</p>
                     <p>Instituição: {{conta.instituicaoFinanceira}}</p>
-                    <p>Saldo: {{conta.saldo}}</p>
+                    <p>Saldo: {{conta.saldo|floatformat:2}}</p>
                     <hr>
                     <div class="update_delete_conta">
                         <a href="{% url 'contas:atualizar' conta.id %}">Atualizar esta conta</a>

@@ -4,30 +4,42 @@
 
 {% block 'conteudo' %}
 {% if contas %}
-    <div class="wrapper_menor">
+    <div class="wrapper">
         <h1>Escolha uma conta:</h1>
-        <div class="contas_grid">
+        <table class="contas_homepage">
+            <tr>
+                <th>Instituição Financeira</th>
+                <th>Tipo de Conta</th>
+                <th>Saldo</th>
+            </tr>
             {% for conta in contas %}
-                <div class="conta_grid">
-                    <a href="{% url 'contas:detalhes' conta.id %}">
-                        <p>Tipo: {{conta.get_tipoConta_display}}</p>
-                        <p>Instituição: {{conta.instituicaoFinanceira}}</p>
-                        <p>Saldo: {{conta.saldo}}</p>
-                        <hr>
-                    </a>
-                        <div class="update_delete_conta">
-                            <a href="{% url 'contas:atualizar' conta.id %}">Atualizar esta conta</a>
-                            <a href="{% url 'contas:deletar' conta.id %}">Deletar esta conta</a>
-                        </div>
-                </div>                
+                <tr>
+                    <td><a href="{% url 'contas:detalhes' conta.id %}">{{conta.instituicaoFinanceira}}</a></td>
+                    <td><a href="{% url 'contas:detalhes' conta.id %}">{{conta.get_tipoConta_display}}</a></td>
+                    <td><a href="{% url 'contas:detalhes' conta.id %}">R$ {{conta.saldo|floatformat:2}}</a></td>
+                </tr>
             {% endfor %}
-        </div>
-        <div class="saldo_total">
-            <p>Saldo total: R$ {{saldo_total|floatformat:2}}</p>
-        </div>
+        </table>
+    <div class="pagination">
+        {% if contas.has_previous %}
+            <a href="?page=1">&laquo; Primeira</a>
+            <a href="?page={{contas.previous_page_number}}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+            Página {{ contas.number }} de {{ contas.paginator.num_pages }}
+        </span>
+
+        {% if contas.has_next %}
+            <a href="?page={{ contas.next_page_number }}">Próxima</a>
+            <a href="?page={{ contas.paginator.num_pages }}">Última &raquo;</a>
+        {% endif %}
+    </div>
+    <div class="saldo_total">
+        <p>Saldo total: R$ {{saldo_total|floatformat:2}}</p>
     </div>
 {% else %}
-    <div class="wrapper_menor">
+    <div class="wrapper">
         <h2>Cadastre uma conta para iniciar</h2>
         <a href="{% url 'contas:cadastrar' %}">Cadastrar uma conta</a>
     </div>

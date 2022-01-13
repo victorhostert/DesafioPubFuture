@@ -3,10 +3,10 @@
 {% block 'titulo' %}Administrador de Finanças{% endblock %}
 
 {% block 'conteudo' %}
-<div class="wrapper_menor">
+<div class="wrapper">
     <div class="receita">
         <h2>{{receita.get_tipoReceita_display}}</h2>
-        <p>Valor: {{receita.valor}}</p>
+        <p>Valor: R$ {{receita.valor|floatformat:2}}</p>
         <p>Descrição: {{receita.descricao}}</p>
         <p>Recebido em {{receita.dataRecebimento}}</p>
         <p>Esperado o recebimento em {{receita.dataRecebimentoEsperado}}</p>
