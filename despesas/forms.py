@@ -1,9 +1,6 @@
 from django import forms
 from .models import Despesas
 
-class DateInput(forms.DateInput):
-    input_type = 'date'
-
 class CriarDespesaForm(forms.ModelForm):
     required_css_class = 'obrigatorio'
     
@@ -14,11 +11,7 @@ class CriarDespesaForm(forms.ModelForm):
             'dataRecebimento',
             'dataRecebimentoEsperado',
             'tipoDespesa',
-        ] 
-        widgets = {
-            'dataRecebimento': DateInput(),
-            'dataRecebimentoEsperado': DateInput(),
-        }
+        ]
 
     def clean_valor(self):
         valor = self.cleaned_data.get('valor')
