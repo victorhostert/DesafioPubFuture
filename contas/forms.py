@@ -47,4 +47,4 @@ class FiltrarContaForm(forms.Form):
     saldo_min = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor mínimo"}))
     saldo_max = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor máximo"}))
     tipoConta = forms.ChoiceField(required=False, choices=Contas.opcoes_tipo_conta, label="Tipo da conta")
-    instituicaoFinanceira = forms.CharField(required=False, max_length=255, label="Instituição Financeira")
+    instituicaoFinanceira = forms.CharField(required=False, max_length=255, label="Instituição Financeira", widget=forms.TextInput(attrs={"placeholder": "Digite seu banco"}))

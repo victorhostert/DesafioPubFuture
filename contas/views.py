@@ -16,7 +16,7 @@ def paginator(request, object, number):
     return page_obj
 
 def pesquisar_contas(request):
-    contas = Contas.objects.all().order_by('id')   
+    contas = Contas.objects.all().order_by('-id')   
     saldo_min = request.POST.get('saldo_min')
     saldo_max = request.POST.get('saldo_max')
     tipo_conta = request.POST.get('tipoConta')
