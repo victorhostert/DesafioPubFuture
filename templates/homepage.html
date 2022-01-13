@@ -4,7 +4,7 @@
 
 {% block 'conteudo' %}
 {% if contas %}
-    <div class="wrapper">
+    <div class="wrapper_homepage">
         <h1>Escolha uma conta:</h1>
         <table class="contas_homepage">
             <tr>
@@ -20,23 +20,24 @@
                 </tr>
             {% endfor %}
         </table>
-    <div class="pagination">
-        {% if contas.has_previous %}
-            <a href="?page=1">&laquo; Primeira</a>
-            <a href="?page={{contas.previous_page_number}}">Anterior</a>
-        {% endif %}
+        <div class="pagination">
+            {% if contas.has_previous %}
+                <a href="?page=1">&laquo; Primeira</a>
+                <a href="?page={{contas.previous_page_number}}">Anterior</a>
+            {% endif %}
 
-        <span class="current">
-            Página {{ contas.number }} de {{ contas.paginator.num_pages }}
-        </span>
+            <span class="current">
+                Página {{ contas.number }} de {{ contas.paginator.num_pages }}
+            </span>
 
-        {% if contas.has_next %}
-            <a href="?page={{ contas.next_page_number }}">Próxima</a>
-            <a href="?page={{ contas.paginator.num_pages }}">Última &raquo;</a>
-        {% endif %}
-    </div>
-    <div class="saldo_total">
-        <p>Saldo total: R$ {{saldo_total|floatformat:2}}</p>
+            {% if contas.has_next %}
+                <a href="?page={{ contas.next_page_number }}">Próxima</a>
+                <a href="?page={{ contas.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </div>
+        <div class="saldo_total">
+            <p>Saldo total: R$ {{saldo_total|floatformat:2}}</p>
+        </div>
     </div>
 {% else %}
     <div class="wrapper">

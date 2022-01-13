@@ -15,7 +15,6 @@
                 </div>
                 <tr>
                     <th>Tipo de Receita</th>
-                    <th>Descrição</th>
                     <th>Data Recebimento</th>
                     <th>Data Recebimento Esperado</th>
                     <th>Valor</th>
@@ -23,7 +22,6 @@
                 {% for receita in receitas %}
                 <tr>
                     <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.get_tipoReceita_display}}</a></td>
-                    <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.descricao_snippet}}</a></td>
                     <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.dataRecebimento}}</a></td>
                     <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.dataRecebimentoEsperado}}</a></td>
                     <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.valor|floatformat:2}}</a></td>

@@ -31,9 +31,14 @@ td, th{
 table tr:last-child td:first-child {
     border-bottom-left-radius: 10px;
 }
-
 table tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
+}
+table th:last-child {
+    border-top-right-radius: 10px;
+}
+table th:first-child{
+    border-top-left-radius: 10px;
 }
 .header{
     height: 50px;
@@ -61,7 +66,7 @@ table tr:last-child td:last-child {
 .wrapper_main{
     min-height: calc(100vh - 80px);
 }
-.wrapper{
+.wrapper, .wrapper_homepage{
     min-height: 65%;
     max-width: 60%;
     background: rgb(15,104,76);
@@ -73,6 +78,13 @@ table tr:last-child td:last-child {
 .wrapper h1, h2{
     margin: 20px;
     font-weight: normal;
+}
+.wrapper_homepage{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-between;
 }
 .contas_homepage{
     width: 100%;
@@ -128,6 +140,7 @@ table tr:last-child td:last-child {
     flex-wrap: wrap;
     padding: 10px;
     align-content: center;
+    max-height: 100%;
 }
 .detalhe_conta *{
     margin: 10px auto;
@@ -135,11 +148,20 @@ table tr:last-child td:last-child {
 .detalhe_conta table{
     max-width: 80%;
 }
+.pagination{
+    margin: 0 auto;
+    width: fit-content;
+}
 .saldo_total{
     font-size: 1.3rem;
     font-weight: 600;
     font-style: italic;
     margin-top: 20px;
+}
+.saldo_field p{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 .formulario{
     padding: 10px;
@@ -173,10 +195,16 @@ table tr:last-child td:last-child {
     padding: 20px;
 }
 .cadastro_despesa_receita{
-    margin-top: 20%;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    max-width: 50%;
 }
 .cadastro_despesa_receita *{
-    float: right;
+    margin: 0 auto;
 }
 .errorlist{
     color: tomato;

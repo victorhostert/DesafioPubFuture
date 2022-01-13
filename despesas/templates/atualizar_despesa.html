@@ -7,7 +7,7 @@
     <h2>Atualizar uma despesa:</h2>
     <form action="{% url 'despesas:atualizar' despesa.id %}" method="post">
         {% csrf_token %}
-        {{form.as_p}}
+        {{form}}
         <button type="submit">Atualizar</button>
     </form>
 </div>

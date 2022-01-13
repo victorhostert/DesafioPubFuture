@@ -8,7 +8,7 @@
         <h2>Cadastrar uma nova conta:</h2>
         <form action="{% url 'contas:cadastrar' %}" method="post">
             {% csrf_token %}
-            {{form.as_p}}
+            {{form}}
             <button type="submit">Cadastrar conta</button>
         </form>
     </div>
