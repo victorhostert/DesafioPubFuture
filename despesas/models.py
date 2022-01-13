@@ -18,7 +18,7 @@ class Despesas(models.Model):
 
     valor = models.FloatField()
     dataRecebimento = models.DateField(verbose_name='Data recebimento')
-    dataRecebimentoEsperado = models.DateField(verbose_name='Data recebimento esperado')
+    dataRecebimentoEsperado = models.DateField(verbose_name='Data recebimento esperado', null=True, blank=True)
     conta = models.ForeignKey(Contas, on_delete=CASCADE)
     tipoDespesa = models.CharField(max_length=2, choices=opcoes_tipo_despesa, verbose_name='Tipo')
 
