@@ -3,7 +3,7 @@
 {% block 'titulo' %}Administrador de Finanças{% endblock %}
 
 {% block 'conteudo' %}
-<div class="wrapper_menor">
+<div class="wrapper">
     <div class="formulario">
         <h2>Cadastrar uma nova receita:</h2>
         <form action="{% url 'receitas:cadastrar' conta.id %}" method="post">
@@ -13,4 +13,9 @@
         </form>
     </div>
 </div>
+<script>
+    $('#id_valor').mask('###.00', {reverse: true});
+    $('#id_dataRecebimento').mask('00/00/0000');
+    $('#id_dataRecebimentoEsperado').mask('00/00/0000');
+</script>
 {% endblock %}

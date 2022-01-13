@@ -3,7 +3,7 @@
 {% block 'titulo' %}Administrador de Finanças{% endblock %}
 
 {% block 'conteudo' %}
-<div class="wrapper_menor">
+<div class="wrapper">
     <div class="formulario">
         <h2>Cadastrar uma nova conta:</h2>
         <form action="{% url 'contas:cadastrar' %}" method="post">
@@ -13,4 +13,7 @@
         </form>
     </div>
 </div>
+<script>
+    $('#id_saldo').mask('###.00', {reverse: true});
+</script>
 {% endblock %}

@@ -11,4 +11,9 @@
         <button type="submit">Atualizar</button>
     </form>
 </div>
+<script>
+    $('#id_valor').mask('###.00', {reverse: true});
+    $('#id_dataRecebimento').mask('00/00/0000');
+    $('#id_dataRecebimentoEsperado').mask('00/00/0000');
+</script>
 {% endblock %}
