@@ -21,3 +21,7 @@ class Despesas(models.Model):
     dataRecebimentoEsperado = models.DateField(verbose_name='Data recebimento esperado')
     conta = models.ForeignKey(Contas, on_delete=CASCADE)
     tipoDespesa = models.CharField(max_length=2, choices=opcoes_tipo_despesa, verbose_name='Tipo')
+
+
+    def __str__(self) -> str:
+        return f'{self.tipoReceita} - {self.valor}'
