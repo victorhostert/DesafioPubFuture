@@ -25,18 +25,17 @@ O primeiro passo é possuir o Git instalado em seu computador. Caso não possua,
 $ git --version # Caso possua git instalado, aparecerá na tela o número da versão
 ```
 
-Clone o projeto utilizando uma chave SSH, em uma pasta de sua preferência, clicando em clone na [página do repositório do projeto](https://github.com/victorhostert/DesafioPubFuture), selecionando a opção para copiar o repositório por chave SSH, e utilizando o seguinte comando:
+Clone o projeto utilizando a url HTTPS, em uma pasta de sua preferência, clicando em clone na [página do repositório do projeto](https://github.com/victorhostert/DesafioPubFuture), selecionando a opção para copiar o repositório por HTTPS, copiando a url e utilizando o seguinte comando:
 
 ```bash
-$ git clone <CHAVE SSH>
-$ cd dupla-a
+$ git clone <URL HTTPS>
 ```
 
-Alternativamente, pode-se usar o comando para cópia por HTTPS, ou apenas baixar o repositório em .zip
+Alternativamente, pode-se usar apenas baixar o repositório em .zip
 
 Após clonar o repositório e acessar o diretório, o repositório já deve estar na sua máquina.
 
-Tendo o repositório em seu ambiente local, garanta que possui o PIP (instalador de bibliotecas do Python) funcionando, e instale as bibliotecas e frameworks especificadas em ```requirements.txt```
+Tendo o repositório em seu ambiente local, garanta que possui o [PIP (instalador de bibliotecas do Python)](https://pip.pypa.io/en/stable/installation/) funcionando, e instale as bibliotecas e frameworks especificadas em ```requirements.txt```
 
 Agora para acessar de fato o site, como o material ainda está disponível apenas em ambiente de produção, deve-se realizar os seguintes comandos em um terminal:
 
