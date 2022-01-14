@@ -41,8 +41,15 @@
     </div>
 {% else %}
     <div class="wrapper">
-        <h2>Cadastre uma conta para iniciar</h2>
-        <a href="{% url 'contas:cadastrar' %}">Cadastrar uma conta</a>
+        <div class="introducao">
+            <h1>Administrador de Finanças</h1>
+            <ul>
+                <li>Para usar este programa, comece criando uma conta, e em seguida adicione suas receitas e despesas</li></li>
+                <li>Após cadastrar algumas receitas, você pode usar o botão filtrar no canto superior direito da tela para achar </li></li>    
+                <li>Você terá vários filtros, para contas, receitas e despesas, podendo ver todas elas por lá também</li>
+            </ul>
+            <button><a href="{% url 'contas:cadastrar' %}">Cadastre uma conta</a></button>
+        </div>
     </div>
 {% endif %}
 {% endblock %}

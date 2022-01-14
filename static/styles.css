@@ -6,11 +6,14 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+/*Paleta de cores*/
 :root {
     --cor-bg-escuro: #0E0E0E;
     --cor-bg-claro: #0F684C;
     --cor-header-footer: #101010;
     --cor-links: #191A21;
+    --cor-branco: #EFEFEF;
 }
 a {
     text-decoration: none;
@@ -83,7 +86,7 @@ button:hover{
 }
 .dropdown-content li {
     float: none;
-    color: #f2f2f2;
+    color: var(--cor-branco);
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -122,6 +125,24 @@ button:hover{
     align-content: center;
     justify-content: space-between;
 }
+.introducao{
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-items: space-between;
+    align-content: center;
+}
+.introducao li, button{
+    margin-top: 40px;
+}
+.introducao h1{
+    font-size: 300%;
+}
+.introducao button{
+    padding: 20px;
+}
 .contas_homepage{
     width: 100%;
     margin: 5px auto;
@@ -157,7 +178,7 @@ button:hover{
 }
 .contas_homepage tr:nth-child(odd),
 .receitas_despesas_conta tr:nth-child(odd){
-    background-color: #F2F2F2;
+    background-color: var(--cor-branco);
 }
 .contas_homepage th,
 .receitas_despesas_conta th{
@@ -230,6 +251,10 @@ button:hover{
     border-radius: 5px;
     padding: 20px;
 }
+.formulario h1{
+    text-align: center;
+    font-size: 220%;
+}
 .cadastro_despesa_receita{
     margin: 0 auto;
     padding: 10px;
@@ -256,7 +281,7 @@ button:hover{
 }
 .despesa,
 .receita{
-    background-color: #F2F2F2;
+    background-color: var(--cor-branco);
     color: var(--cor-links);
     border-radius: 20px;
     display: flex;
