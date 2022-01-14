@@ -17,11 +17,11 @@ class Despesas(models.Model):
     ]
 
     valor = models.FloatField()
-    dataPagamento = models.DateField(verbose_name='Data recebimento')
-    dataPagamentoEsperado = models.DateField(verbose_name='Data recebimento esperado', null=True, blank=True)
+    dataPagamento = models.DateField(verbose_name='Data pagamento')
+    dataPagamentoEsperado = models.DateField(verbose_name='Data pagamento esperado', null=True, blank=True)
     conta = models.ForeignKey(Contas, on_delete=CASCADE)
     tipoDespesa = models.CharField(max_length=2, choices=opcoes_tipo_despesa, verbose_name='Tipo')
 
 
     def __str__(self) -> str:
-        return f'{self.tipoReceita} - {self.valor}'
+        return f'{self.tipoDespesa} - {self.valor}'

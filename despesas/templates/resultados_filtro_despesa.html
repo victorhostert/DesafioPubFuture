@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block 'titulo' %}Administrador de Finanças{% endblock %}
+
+{% block 'conteudo' %}
+<div class="wrapper">
+    {% if despesas %}
+    <div class="resultados_table">
+        <h1>Resultados da pesquisa:</h1>
+        <table>
+            <thead>
+                <th>Conta</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Data Pagamento</th>
+                <th>Data Esperada</th>
+                <th>Atualizar</th>
+                <th>Deletar</th>
+            </thead>
+            <tbody>
+                {% for despesa in despesas %}
+                    <div class="resultado">
+                        <tr>
+                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.conta }}</a></td>
+                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.get_tipodespesa_display }}</a></td>
+                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">R$ {{ despesa.valor|floatformat:2 }}</a></td>
+                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.dataPagamento }}</a></td>
+                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.dataPagamentoEsperado }}</a></td>
+                            <td><a href="{% url 'despesas:atualizar' despesa.id %}"><i class="fas fa-pen-alt"></i></a></td>
+                            <td><a href="{% url 'despesas:deletar' despesa.id %}"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
+                    </div>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'despesas:filtrar' %}"><button>Fazer outra pesquisa</button></a>   
+    </div>
+    {% else %}
+        <h1>Sua pesquisa não gerou resultados</h1>
+        <a href="{% url 'despesas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
+    {% endif %}
+</div>
+{% endblock %}

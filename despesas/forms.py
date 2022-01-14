@@ -1,4 +1,6 @@
 from django import forms
+from django.db.utils import OperationalError
+from contas.models import Contas
 from .models import Despesas
 
 class CriarDespesaForm(forms.ModelForm):
@@ -24,3 +26,23 @@ class CriarDespesaForm(forms.ModelForm):
         if valor > saldo:
             raise forms.ValidationError('O valor da despesa é superior ao saldo disponível')
         return valor
+
+
+class FiltrarDespesaForm(forms.Form):
+    contas_opcoes = [
+        ('', 'Selecione uma conta')
+    ]
+    try:
+        for conta in Contas.objects.all().order_by('id'):
+            contas_opcoes.append((conta.id, conta))
+    except OperationalError:
+        contas_opcoes = []
+
+    valor_min = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor mínimo"}))
+    valor_max = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor máximo"}))
+    tipo = forms.ChoiceField(required=False, choices=Despesas.opcoes_tipo_despesa, label="Tipo")
+    conta = forms.ChoiceField(required=False, choices=contas_opcoes, label="Conta")
+    data_pagamento_inicial = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
+    data_pagamento_final = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
+    data_esperado_inicial = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
+    data_esperado_final = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
