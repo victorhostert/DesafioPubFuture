@@ -16,8 +16,8 @@ class CriarReceitaForm(forms.ModelForm):
             'tipoReceita'
         ]
         widgets = {
-            'dataRecebimento': forms.TextInput(attrs={'placeholder': 'DD/MM/AAAA'}),
-            'dataRecebimentoEsperado': forms.TextInput(attrs={'placeholder': 'DD/MM/AAAA'})
+            'dataRecebimento': forms.DateInput(attrs={'placeholder': 'DD/MM/AAAA'}, format="%d/%m/%Y"),
+            'dataRecebimentoEsperado': forms.DateInput(attrs={'placeholder': 'DD/MM/AAAA'}, format="%d/%m/%Y")
         }
 
 class FiltrarReceitaForm(forms.Form):

@@ -3,16 +3,26 @@ from contas.models import Contas
 from .forms import CriarReceitaForm, FiltrarReceitaForm
 from .models import Receitas
 
+def formatar_datas(data):
+    '##/##/####'
+    dia = data[0:2]
+    mes = data[3:5]
+    ano = data[6:]
+    return f'{ano}-{mes}-{dia}'
+
 def pesquisar_receitas(request):
     receitas = Receitas.objects.all().order_by('id')
     valor_min = request.POST.get('valor_min')
     valor_max = request.POST.get('valor_max')
+    descricao = request.POST.get('descricao')
     tipo = request.POST.get('tipo')
     conta = request.POST.get('conta')
     data_recebimento_inicial = request.POST.get('data_recebimento_inicial')
     data_recebimento_final = request.POST.get('data_recebimento_final')
     data_esperado_inicial = request.POST.get('data_esperado_inicial')
-    data_esperado_final = request.POST.get('data_esperado_final')
+    data_esperado_final = request.POST.get('data_esperado_final')    
+    print(Receitas.objects.get(id=1).dataRecebimento)
+    print(formatar_datas(data_recebimento_inicial))
 
     if not receitas:
         return None
@@ -30,22 +40,36 @@ def pesquisar_receitas(request):
     if tipo and tipo != '':
         receitas = receitas.filter(tipoReceita__iexact=tipo)
 
+    if descricao and descricao != '':
+        receitas = receitas.filter(descricao__icontains=descricao)
+
     if data_recebimento_inicial and data_recebimento_inicial != '' and \
         data_recebimento_final and data_recebimento_final != '':
+        data_recebimento_inicial = formatar_datas(data_recebimento_inicial)
+        data_recebimento_final = formatar_datas(data_recebimento_final)
         receitas = receitas.filter(dataRecebimento__range=[data_recebimento_inicial, data_recebimento_final])
+    
     if data_esperado_inicial and data_esperado_inicial != '' and \
         data_esperado_final and data_esperado_final != '':
+        data_esperado_inicial = formatar_datas(data_esperado_inicial)
+        data_esperado_final = formatar_datas(data_esperado_final) 
         receitas = receitas.filter(dataRecebimentoEsperado__range=[data_esperado_inicial, data_esperado_final])
     
     if data_recebimento_inicial and data_recebimento_inicial != '':
-        receitas = receitas.filter(dataRecebimento__lte=data_recebimento_inicial)
+        data_recebimento_inicial = formatar_datas(data_recebimento_inicial)
+        receitas = receitas.filter(dataRecebimento__gte=data_recebimento_inicial)
+
     if data_recebimento_final and data_recebimento_final != '':
-        receitas = receitas.filter(dataRecebimento__gte=data_recebimento_final)
+        data_recebimento_final = formatar_datas(data_recebimento_final)
+        receitas = receitas.filter(dataRecebimento__lte=data_recebimento_final)
     
     if data_esperado_inicial and data_esperado_inicial != '':
-        receitas = receitas.filter(dataRecebimentoEsperado__lte=data_esperado_inicial)
+        data_esperado_inicial = formatar_datas(data_esperado_inicial)
+        receitas = receitas.filter(dataRecebimentoEsperado__gte=data_esperado_inicial)
+
     if data_esperado_final and data_esperado_final != '':
-        receitas = receitas.filter(dataRecebimentoEsperado__gte=data_esperado_final)
+        data_esperado_final = formatar_datas(data_esperado_final)
+        receitas = receitas.filter(dataRecebimentoEsperado__lte=data_esperado_final)
     
     return receitas
 
