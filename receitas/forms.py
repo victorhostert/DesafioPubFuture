@@ -1,6 +1,7 @@
 from django import forms
 from contas.models import Contas
 from .models import Receitas
+from django.db.utils import OperationalError
 
 class CriarReceitaForm(forms.ModelForm):
     required_css_class = 'obrigatorio'
@@ -19,9 +20,11 @@ class FiltrarReceitaForm(forms.Form):
     contas_opcoes = [
         ('', 'Selecione uma conta')
     ]
-    for conta in Contas.objects.all().order_by('id'):
-        contas_opcoes.append((conta.id, conta))
-
+    try:
+        for conta in Contas.objects.all().order_by('id'):
+            contas_opcoes.append((conta.id, conta))
+    except OperationalError:
+        contas_opcoes = []
 
     valor_min = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor mínimo"}))
     valor_max = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor máximo"}))
