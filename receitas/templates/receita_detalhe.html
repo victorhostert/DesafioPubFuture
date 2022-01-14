@@ -4,6 +4,7 @@
 
 {% block 'conteudo' %}
     <div class="receita">
+        <h1>Receita</h1>
         <h2>Tipo: {{receita.get_tipoReceita_display}}</h2>
         <p>Valor: R$ {{receita.valor|floatformat:2}}</p>
         {% if receita.descricao %}
@@ -13,9 +14,9 @@
         {% if receita.dataRecebimentoEsperado %}
             <p>Esperado o recebimento em: {{receita.dataRecebimentoEsperado}}</p>
         {% endif %}
-        <div class="update_delete">
-            <a href="{% url 'receitas:atualizar' receita.id %}">Atualizar</a>
-            <a href="{% url 'receitas:deletar' receita.id %}">Excluir</a>
+        <div class="atualizar_excluir">
+            <button><a href="{% url 'receitas:atualizar' receita.id %}">Atualizar</a></button>
+            <button><a href="{% url 'receitas:deletar' receita.id %}">Excluir</a></button>
         </div>
     </div>
 {% endblock %}

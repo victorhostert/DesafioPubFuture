@@ -5,14 +5,16 @@
 {% block 'conteudo' %}
 <div class="wrapper">
     <div class="formulario">
-        <h2>Deseja mesmo deletar esta despesa?</h2>
-        <span>{{ despesa.get_tipoDespesa_display }} - R$ {{despesa.valor|floatformat:2}}</span>
-        <div class="deletar_despesa">
-            <form action="{% url 'despesas:deletar' despesa.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Sim</button>
-            </form>
-            <button><a href="{% url 'homepage' %}">Não</a></button>
+        <div class="deletar_objeto">
+            <h1>Deseja mesmo deletar esta despesa?</h1>
+            <h2>{{ despesa.get_tipoDespesa_display }} - R$ {{ despesa.valor|floatformat:2 }}</h2>
+            <div class="deletar_objeto_buttons">
+                <form action="{% url 'despesas:deletar' despesa.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Sim</button>
+                </form>
+                <button><a href="{% url 'homepage' %}">Não</a></button>
+            </div>
         </div>
     </div>
 </div>

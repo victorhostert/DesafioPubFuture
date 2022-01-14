@@ -328,6 +328,28 @@ button:hover{
     width: fit-content; 
     border-spacing: 0; 
 }
+.deletar_objeto{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.deletar_objeto button{
+    margin: 10px 0px 0px;   
+    border-radius: 5px;
+    padding: 20px;
+    margin: 5px;
+    padding: 15px;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.1em;
+}
+.deletar_objeto h1, h2{
+    text-align: center;
+}
+.deletar_objeto_buttons button{
+    margin: 0 auto;
+    display: block;
+}
 .errorlist{
     color: tomato;
     list-style: none;

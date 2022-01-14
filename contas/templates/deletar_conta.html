@@ -5,14 +5,16 @@
 {% block 'conteudo' %}
 <div class="wrapper">
     <div class="formulario">
-        <h2>Deseja mesmo deletar esta conta?</h2>
-        <span>{{ conta }}</span>
-        <div class="deletar_conta">
-            <form action="{% url 'contas:deletar' conta.id %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Sim</button>
-            </form>
-            <button><a href="{% url 'homepage' %}">Não</a></button>
+        <div class="deletar_objeto">
+            <h1>Deseja mesmo deletar esta conta?</h1>
+            <h2>{{ conta.instituicaoFinanceira }} - {{ conta.get_tipoConta_display }}</h2>
+            <div class="deletar_objeto_buttons">
+                <form action="{% url 'contas:deletar' conta.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Sim</button>
+                </form>
+                <button><a href="{% url 'homepage' %}">Não</a></button>
+            </div>
         </div>
     </div>
 </div>

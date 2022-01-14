@@ -4,9 +4,10 @@
 
 {% block 'conteudo' %}
     <div class="despesa">
+        <h1>Despesa</h1>
         <h2>Tipo: {{despesa.get_tipoDespesa_display}}</h2>
-        <p>Valor: {{despesa.valor|floatformat:2}}</p>
-        <p>Recebido em: {{despesa.dataPagamento}}</p>
+        <p>Valor: R$ {{despesa.valor|floatformat:2}}</p>
+        <p>Pago em: {{despesa.dataPagamento}}</p>
         {% if despesa.dataPagamentoEsperado %}
             <p>Esperado o pagamento em: {{despesa.dataPagamentoEsperado}}</p>
         {% endif %}
