@@ -5,27 +5,35 @@
 {% block 'conteudo' %}
 <div class="wrapper">
     {% if contas %}
+    <div class="resultados_table">
         <h1>Resultados da pesquisa:</h1>
-        <div class="contas_grid">
-            {% for conta in contas %}
-            <div class="conta_grid">
-                <a href="{% url 'contas:detalhes' conta.id %}">
-                    <p>{{conta.get_tipoConta_display}}</p>
-                    <p>Instituição: {{conta.instituicaoFinanceira}}</p>
-                    <p>Saldo: {{conta.saldo|floatformat:2}}</p>
-                    <hr>
-                    <div class="update_delete_conta">
-                        <a href="{% url 'contas:atualizar' conta.id %}">Atualizar esta conta</a>
-                        <a href="{% url 'contas:deletar' conta.id %}">Deletar esta conta</a>
+        <table>
+            <thead>
+                <th>Instituição</th>
+                <th>Tipo</th>
+                <th>Saldo</th>
+                <th>Atualizar</th>
+                <th>Deletar</th>
+            </thead>
+            <tbody>
+                {% for conta in contas %}
+                    <div class="resultado">
+                        <tr>
+                            <td><a href="{% url 'contas:detalhes' conta.id %}">{{ conta.instituicaoFinanceira }}</a></td>
+                            <td><a href="{% url 'contas:detalhes' conta.id %}">{{ conta.get_tipoConta_display }}</a></td>
+                            <td><a href="{% url 'contas:detalhes' conta.id %}">R$ {{ conta.saldo|floatformat:2 }}</a></td>
+                            <td><a href="{% url 'contas:atualizar' conta.id %}"><i class="fas fa-pen-alt"></i></a></td>
+                            <td><a href="{% url 'contas:deletar' conta.id %}"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
                     </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-        <a href="{% url 'contas:filtrar' %}">Fazer outra pesquisa</a>   
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'contas:filtrar' %}"><button>Fazer outra pesquisa</button></a>   
+    </div>
     {% else %}
         <h1>Sua pesquisa não gerou resultados</h1>
-        <a href="{% url 'contas:filtrar' %}">Clique aqui para pesquisar por outros termos</a>
+        <a href="{% url 'contas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
     {% endif %}
 </div>
 {% endblock %}

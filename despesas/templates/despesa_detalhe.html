@@ -6,8 +6,10 @@
     <div class="despesa">
         <h2>Tipo: {{despesa.get_tipoDespesa_display}}</h2>
         <p>Valor: {{despesa.valor|floatformat:2}}</p>
-        <p>Recebido em {{despesa.dataRecebimento}}</p>
-        <p>Esperado o recebimento em {{despesa.dataRecebimentoEsperado}}</p>
+        <p>Recebido em: {{despesa.dataRecebimento}}</p>
+        {% if despesa.dataRecebimentoEsperado %}
+            <p>Esperado o recebimento em: {{despesa.dataRecebimentoEsperado}}</p>
+        {% endif %}
         <div class="atualizar_excluir">
             <button><a href="href="{% url 'despesas:atualizar' despesa.id %}"">Atualizar</a></button>
             <button><a href="{% url 'despesas:deletar' despesa.id %}">Excluir</a></button>

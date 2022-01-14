@@ -34,11 +34,11 @@
                 {% if receitas.has_previous %}
                 <a href="?page=1">&laquo; Primeira</a>
                 <a href="?page={{receitas.previous_page_number}}">Anterior</a>
-                {% endif %}
-                
                 <span class="current">
                     Página {{ receitas.number }} de {{ receitas.paginator.num_pages }}
                 </span>
+                {% endif %}
+                
                 
                 {% if receitas.has_next %}
                 <a href="?page={{ receitas.next_page_number }}">Próxima</a>
@@ -84,11 +84,11 @@
                     {% if receitas.has_previous %}
                         <a href="?page=1">&laquo; Primeira</a>
                         <a href="?page={{receitas.previous_page_number}}">Anterior</a>
+                        <span class="current">
+                            Página {{ receitas.number }} de {{ receitas.paginator.num_pages }}
+                        </span>
                     {% endif %}
         
-                    <span class="current">
-                        Página {{ receitas.number }} de {{ receitas.paginator.num_pages }}
-                    </span>
         
                     {% if receitas.has_next %}
                         <a href="?page={{ receitas.next_page_number }}">Próxima</a>

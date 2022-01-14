@@ -6,9 +6,13 @@
     <div class="receita">
         <h2>Tipo: {{receita.get_tipoReceita_display}}</h2>
         <p>Valor: R$ {{receita.valor|floatformat:2}}</p>
-        <p>Descrição: {{receita.descricao}}</p>
-        <p>Recebido em {{receita.dataRecebimento}}</p>
-        <p>Esperado o recebimento em {{receita.dataRecebimentoEsperado}}</p>
+        {% if receita.descricao %}
+            <p>Descrição: {{receita.descricao}}</p>
+        {% endif %}
+        <p>Recebido em: {{receita.dataRecebimento}}</p>
+        {% if receita.dataRecebimentoEsperado %}
+            <p>Esperado o recebimento em: {{receita.dataRecebimentoEsperado}}</p>
+        {% endif %}
         <div class="update_delete">
             <a href="{% url 'receitas:atualizar' receita.id %}">Atualizar</a>
             <a href="{% url 'receitas:deletar' receita.id %}">Excluir</a>

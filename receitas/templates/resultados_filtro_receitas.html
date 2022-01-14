@@ -5,26 +5,39 @@
 {% block 'conteudo' %}
 <div class="wrapper">
     {% if receitas %}
+    <div class="resultados_table">
         <h1>Resultados da pesquisa:</h1>
-        <div class="receitas_grid">
-            {% for receita in receitas %}
-            <div class="receita_grid">
-                <a href="{% url 'receitas:detalhe' receita.id %}">
-                    <p>{{receita.get_tipoReceita_display}}</p>
-                    <p>Valor: {{receita.valor|floatformat:2}}</p>
-                    <hr>
-                    <div class="update_delete_receita">
-                        <a href="{% url 'receitas:atualizar' receita.id %}">Atualizar esta receita</a>
-                        <a href="{% url 'receitas:deletar' receita.id %}">Deletar esta receita</a>
+        <table>
+            <thead>
+                <th>Conta</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Data Recebimento</th>
+                <th>Data Esperada</th>
+                <th>Atualizar</th>
+                <th>Deletar</th>
+            </thead>
+            <tbody>
+                {% for receita in receitas %}
+                    <div class="resultado">
+                        <tr>
+                            <td><a href="{% url 'receitas:detalhe' receita.id %}">{{ receita.conta }}</a></td>
+                            <td><a href="{% url 'receitas:detalhe' receita.id %}">{{ receita.get_tipoReceita_display }}</a></td>
+                            <td><a href="{% url 'receitas:detalhe' receita.id %}">R$ {{ receita.valor|floatformat:2 }}</a></td>
+                            <td><a href="{% url 'receitas:detalhe' receita.id %}">R$ {{ receita.dataRecebimento }}</a></td>
+                            <td><a href="{% url 'receitas:detalhe' receita.id %}">R$ {{ receita.dataRecebimentoEsperado }}</a></td>
+                            <td><a href="{% url 'receitas:atualizar' receita.id %}"><i class="fas fa-pen-alt"></i></a></td>
+                            <td><a href="{% url 'receitas:deletar' receita.id %}"><i class="fas fa-trash-alt"></i></a></td>
+                        </tr>
                     </div>
-                </a>
-            </div>
-            {% endfor %}
-        </div>
-        <a href="{% url 'receitas:filtrar' %}">Fazer outra pesquisa</a>   
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'receitas:filtrar' %}"><button>Fazer outra pesquisa</button></a>   
+    </div>
     {% else %}
         <h1>Sua pesquisa não gerou resultados</h1>
-        <a href="{% url 'receitas:filtrar' %}">Clique aqui para pesquisar por outros termos</a>
+        <a href="{% url 'receitas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
     {% endif %}
 </div>
 {% endblock %}

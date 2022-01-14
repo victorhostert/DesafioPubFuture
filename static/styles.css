@@ -159,25 +159,30 @@ button:hover{
     border-radius: 5px;
 }
 .receitas_despesas_conta a,
-.contas_homepage a{
+.contas_homepage a,
+.resultados_table a{
     color: black;
     text-align: center;
 }
 .receitas_despesas_conta a:visited,
-.contas_homepage a:visited{
+.contas_homepage a:visited,
+.resultados_table a{
     color: black;
 }
 .receitas_despesas_conta td,
-.contas_homepage td{
+.contas_homepage td,
+.resultados_table td{
     padding: 10px;
     margin: 0;
 }
 .contas_homepage tr:nth-child(even),
-.receitas_despesas_conta tr:nth-child(even){
+.receitas_despesas_conta tr:nth-child(even),
+.resultados_table tr:nth-child(even){
     background-color: #dbdbdb;
 }
 .contas_homepage tr:nth-child(odd),
-.receitas_despesas_conta tr:nth-child(odd){
+.receitas_despesas_conta tr:nth-child(odd),
+.resultados_table tr:nth-child(odd){
     background-color: var(--cor-branco);
 }
 .contas_homepage th,
@@ -211,9 +216,11 @@ button:hover{
 }
 .saldo_total{
     font-size: 1.3rem;
+    width: fit-content;
     font-weight: 600;
     font-style: italic;
     margin-top: 20px;
+    
 }
 .saldo_field p{
     display: flex;
@@ -232,12 +239,9 @@ button:hover{
     max-width: 50%;
     margin: 10px auto;
 }
-.obrigatorio label::after{
-    float: right;
-    position: relative;
-    right: 50px;
+.obrigatorio::after{
     content: " *";
-    color: #dbdbdb;
+    color: var(--cor-branco);
 }
 .formulario form *{
     margin: 5px;
@@ -303,6 +307,26 @@ button:hover{
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+}
+.resultados_table{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.resultados_table th{
+    color: var(--cor-bg-escuro);
+    padding: 10px;
+    background-color: #dbdbdb;
+}
+.resultados_table h1{
+    margin: 20px auto;
+    text-align: center;
+}
+.resultados_table table{
+    display: block;
+    margin: 25px auto;
+    width: fit-content; 
+    border-spacing: 0; 
 }
 .errorlist{
     color: tomato;

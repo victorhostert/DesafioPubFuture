@@ -15,6 +15,10 @@ class CriarReceitaForm(forms.ModelForm):
             'descricao',
             'tipoReceita'
         ]
+        widgets = {
+            'dataRecebimento': forms.TextInput(attrs={'placeholder': 'DD/MM/AAAA'}),
+            'dataRecebimentoEsperado': forms.TextInput(attrs={'placeholder': 'DD/MM/AAAA'})
+        }
 
 class FiltrarReceitaForm(forms.Form):
     contas_opcoes = [
