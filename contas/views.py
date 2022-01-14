@@ -38,7 +38,7 @@ def pesquisar_contas(request):
 
 def detalhes_conta_view(request, id):
     conta = Contas.objects.get(id=id)
-    despesas = Despesas.objects.filter(conta=conta).order_by('dataRecebimento')
+    despesas = Despesas.objects.filter(conta=conta).order_by('dataPagamento')
     receitas = Receitas.objects.filter(conta=conta).order_by('dataRecebimento')
     pag_despesas = paginator(request, despesas, 10)
     pag_receitas = paginator(request, receitas, 10)
@@ -106,8 +106,8 @@ def transferencia_conta_view(request):
                 conta=conta2
             )
             Despesas.objects.create(
-                dataRecebimento=date.today(),
-                dataRecebimentoEsperado=date.today(),
+                dataPagamento=date.today(),
+                dataPagamentoEsperado=date.today(),
                 valor = valor,
                 tipoDespesa = 'OU',
                 conta=conta1

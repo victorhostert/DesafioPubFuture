@@ -4,11 +4,12 @@ from .forms import CriarReceitaForm, FiltrarReceitaForm
 from .models import Receitas
 
 def formatar_datas(data):
-    '##/##/####'
-    dia = data[0:2]
-    mes = data[3:5]
-    ano = data[6:]
-    return f'{ano}-{mes}-{dia}'
+    if '/' in data:
+        dia = data[0:2]
+        mes = data[3:5]
+        ano = data[6:]
+        data = f'{ano}-{mes}-{dia}'
+    return data
 
 def pesquisar_receitas(request):
     receitas = Receitas.objects.all().order_by('id')
@@ -21,8 +22,6 @@ def pesquisar_receitas(request):
     data_recebimento_final = request.POST.get('data_recebimento_final')
     data_esperado_inicial = request.POST.get('data_esperado_inicial')
     data_esperado_final = request.POST.get('data_esperado_final')    
-    print(Receitas.objects.get(id=1).dataRecebimento)
-    print(formatar_datas(data_recebimento_inicial))
 
     if not receitas:
         return None
