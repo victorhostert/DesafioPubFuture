@@ -72,8 +72,8 @@
                     {% for despesa in despesas %}
                         <tr>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.get_tipoDespesa_display}}</a></td>
-                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.dataRecebimento}}</a></td>
-                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.dataRecebimentoEsperado}}</a></td>
+                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.dataPagamento}}</a></td>
+                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.dataPagamentoEsperado}}</a></td>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.valor|floatformat:2}}</a></td>
                         </tr>
                     {% endfor %}

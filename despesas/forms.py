@@ -8,13 +8,13 @@ class CriarDespesaForm(forms.ModelForm):
         model = Despesas
         fields = [
             'valor',
-            'dataRecebimento',
-            'dataRecebimentoEsperado',
+            'dataPagamento',
+            'dataPagamentoEsperado',
             'tipoDespesa',
         ]
         widgets = {
-            'dataRecebimento': forms.DateInput(attrs={'placeholder': 'DD/MM/AAAA'}, format="%d/%m/%Y"),
-            'dataRecebimentoEsperado': forms.DateInput(attrs={'placeholder': 'DD/MM/AAAA'}, format="%d/%m/%Y")
+            'dataPagamento': forms.DateInput(attrs={'placeholder': 'DD/MM/AAAA'}, format="%d/%m/%Y"),
+            'dataPagamentoEsperado': forms.DateInput(attrs={'placeholder': 'DD/MM/AAAA'}, format="%d/%m/%Y")
         }
 
     def clean_valor(self):
