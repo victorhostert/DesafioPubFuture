@@ -2,6 +2,7 @@ from django.shortcuts import render
 from contas.models import Contas
 from contas.views import paginator
 
+
 def homepage(request):
     contas = Contas.objects.all()
     saldo_total = 0

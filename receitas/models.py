@@ -15,11 +15,13 @@ class Receitas(models.Model):
 
     valor = models.FloatField()
     dataRecebimento = models.DateField(verbose_name='Data recebimento')
-    dataRecebimentoEsperado = models.DateField(verbose_name='Data esperada para recebimento', null=True, blank=True)
-    descricao = models.CharField(max_length=500, verbose_name='Descrição', null=True, blank=True)
+    dataRecebimentoEsperado = models.DateField(
+        verbose_name='Data esperada para recebimento', null=True, blank=True)
+    descricao = models.CharField(
+        max_length=500, verbose_name='Descrição', null=True, blank=True)
     conta = models.ForeignKey(Contas, on_delete=CASCADE, default=None)
-    tipoReceita = models.CharField(max_length=50, choices=opcoes_tipo_receita, verbose_name='Tipo')
+    tipoReceita = models.CharField(
+        max_length=50, choices=opcoes_tipo_receita, verbose_name='Tipo')
 
-    
     def __str__(self) -> str:
-        return f'{self.tipoReceita} - {self.valor}' 
+        return f'{self.tipoReceita} - {self.valor}'

@@ -3,6 +3,7 @@ from contas.models import Contas
 from .forms import CriarReceitaForm, FiltrarReceitaForm
 from .models import Receitas
 
+
 def formatar_datas(data):
     if '/' in data:
         dia = data[0:2]
@@ -10,6 +11,7 @@ def formatar_datas(data):
         ano = data[6:]
         data = f'{ano}-{mes}-{dia}'
     return data
+
 
 def pesquisar_receitas(request):
     receitas = Receitas.objects.all().order_by('id')
@@ -21,7 +23,7 @@ def pesquisar_receitas(request):
     data_recebimento_inicial = request.POST.get('data_recebimento_inicial')
     data_recebimento_final = request.POST.get('data_recebimento_final')
     data_esperado_inicial = request.POST.get('data_esperado_inicial')
-    data_esperado_final = request.POST.get('data_esperado_final')    
+    data_esperado_final = request.POST.get('data_esperado_final')
 
     if not receitas:
         return None
@@ -43,34 +45,40 @@ def pesquisar_receitas(request):
         receitas = receitas.filter(descricao__icontains=descricao)
 
     if data_recebimento_inicial and data_recebimento_inicial != '' and \
-        data_recebimento_final and data_recebimento_final != '':
+            data_recebimento_final and data_recebimento_final != '':
         data_recebimento_inicial = formatar_datas(data_recebimento_inicial)
         data_recebimento_final = formatar_datas(data_recebimento_final)
-        receitas = receitas.filter(dataRecebimento__range=[data_recebimento_inicial, data_recebimento_final])
-    
+        receitas = receitas.filter(dataRecebimento__range=[
+                                   data_recebimento_inicial, data_recebimento_final])
+
     if data_esperado_inicial and data_esperado_inicial != '' and \
-        data_esperado_final and data_esperado_final != '':
+            data_esperado_final and data_esperado_final != '':
         data_esperado_inicial = formatar_datas(data_esperado_inicial)
-        data_esperado_final = formatar_datas(data_esperado_final) 
-        receitas = receitas.filter(dataRecebimentoEsperado__range=[data_esperado_inicial, data_esperado_final])
-    
+        data_esperado_final = formatar_datas(data_esperado_final)
+        receitas = receitas.filter(dataRecebimentoEsperado__range=[
+                                   data_esperado_inicial, data_esperado_final])
+
     if data_recebimento_inicial and data_recebimento_inicial != '':
         data_recebimento_inicial = formatar_datas(data_recebimento_inicial)
-        receitas = receitas.filter(dataRecebimento__gte=data_recebimento_inicial)
+        receitas = receitas.filter(
+            dataRecebimento__gte=data_recebimento_inicial)
 
     if data_recebimento_final and data_recebimento_final != '':
         data_recebimento_final = formatar_datas(data_recebimento_final)
         receitas = receitas.filter(dataRecebimento__lte=data_recebimento_final)
-    
+
     if data_esperado_inicial and data_esperado_inicial != '':
         data_esperado_inicial = formatar_datas(data_esperado_inicial)
-        receitas = receitas.filter(dataRecebimentoEsperado__gte=data_esperado_inicial)
+        receitas = receitas.filter(
+            dataRecebimentoEsperado__gte=data_esperado_inicial)
 
     if data_esperado_final and data_esperado_final != '':
         data_esperado_final = formatar_datas(data_esperado_final)
-        receitas = receitas.filter(dataRecebimentoEsperado__lte=data_esperado_final)
-    
+        receitas = receitas.filter(
+            dataRecebimentoEsperado__lte=data_esperado_final)
+
     return receitas
+
 
 def cadastrar_receita_view(request, id):
     conta = Contas.objects.get(id=id)
@@ -88,9 +96,11 @@ def cadastrar_receita_view(request, id):
 
     return render(request, 'cadastrar_receita.html', {'form': form, 'conta': conta})
 
+
 def detalhe_receita_view(request, id):
     receita = Receitas.objects.get(id=id)
     return render(request, 'receita_detalhe.html', {'receita': receita})
+
 
 def atualizar_receita_view(request, id):
     receita = Receitas.objects.get(id=id)
@@ -109,6 +119,7 @@ def atualizar_receita_view(request, id):
 
     return render(request, 'atualizar_receita.html', {'form': form, 'conta': conta, 'receita': receita})
 
+
 def deletar_receita_view(request, id):
     receita = Receitas.objects.get(id=id)
     if request.method == 'POST':
@@ -119,6 +130,7 @@ def deletar_receita_view(request, id):
         return redirect('contas:detalhes', id=conta.id)
     else:
         return render(request, 'deletar_receita.html', {'receita': receita})
+
 
 def filtrar_receitas_view(request):
     if request.method == 'POST':

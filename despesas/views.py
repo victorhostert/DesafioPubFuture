@@ -4,6 +4,7 @@ from .forms import CriarDespesaForm, FiltrarDespesaForm
 from contas.models import Contas
 from receitas.views import formatar_datas
 
+
 def pesquisar_despesas(request):
     despesas = Despesas.objects.all().order_by('id')
     valor_min = request.POST.get('valor_min')
@@ -13,7 +14,7 @@ def pesquisar_despesas(request):
     data_pagamento_inicial = request.POST.get('data_pagamento_inicial')
     data_pagamento_final = request.POST.get('data_pagamento_final')
     data_esperado_inicial = request.POST.get('data_esperado_inicial')
-    data_esperado_final = request.POST.get('data_esperado_final')    
+    data_esperado_final = request.POST.get('data_esperado_final')
 
     if not despesas:
         return None
@@ -32,17 +33,19 @@ def pesquisar_despesas(request):
         despesas = despesas.filter(tipoDespesa__iexact=tipo)
 
     if data_pagamento_inicial and data_pagamento_inicial != '' and \
-        data_pagamento_final and data_pagamento_final != '':
+            data_pagamento_final and data_pagamento_final != '':
         data_pagamento_inicial = formatar_datas(data_pagamento_inicial)
         data_pagamento_final = formatar_datas(data_pagamento_final)
-        despesas = despesas.filter(dataPagamento__range=[data_pagamento_inicial, data_pagamento_final])
-    
+        despesas = despesas.filter(dataPagamento__range=[
+                                   data_pagamento_inicial, data_pagamento_final])
+
     if data_esperado_inicial and data_esperado_inicial != '' and \
-        data_esperado_final and data_esperado_final != '':
+            data_esperado_final and data_esperado_final != '':
         data_esperado_inicial = formatar_datas(data_esperado_inicial)
-        data_esperado_final = formatar_datas(data_esperado_final) 
-        despesas = despesas.filter(dataPagamentoEsperado__range=[data_esperado_inicial, data_esperado_final])
-    
+        data_esperado_final = formatar_datas(data_esperado_final)
+        despesas = despesas.filter(dataPagamentoEsperado__range=[
+                                   data_esperado_inicial, data_esperado_final])
+
     if data_pagamento_inicial and data_pagamento_inicial != '':
         data_pagamento_inicial = formatar_datas(data_pagamento_inicial)
         despesas = despesas.filter(dataPagamento__gte=data_pagamento_inicial)
@@ -50,16 +53,19 @@ def pesquisar_despesas(request):
     if data_pagamento_final and data_pagamento_final != '':
         data_pagamento_final = formatar_datas(data_pagamento_final)
         despesas = despesas.filter(dataPagamento__lte=data_pagamento_final)
-    
+
     if data_esperado_inicial and data_esperado_inicial != '':
         data_esperado_inicial = formatar_datas(data_esperado_inicial)
-        despesas = despesas.filter(dataPagamentoEsperado__gte=data_esperado_inicial)
+        despesas = despesas.filter(
+            dataPagamentoEsperado__gte=data_esperado_inicial)
 
     if data_esperado_final and data_esperado_final != '':
         data_esperado_final = formatar_datas(data_esperado_final)
-        despesas = despesas.filter(dataPagamentoEsperado__lte=data_esperado_final)
+        despesas = despesas.filter(
+            dataPagamentoEsperado__lte=data_esperado_final)
 
     return despesas
+
 
 def cadastrar_despesa_view(request, id):
     conta = Contas.objects.get(id=id)
@@ -78,9 +84,11 @@ def cadastrar_despesa_view(request, id):
 
     return render(request, 'cadastrar_despesa.html', {'form': form, 'conta': conta})
 
+
 def detalhe_despesa_view(request, id):
     despesa = Despesas.objects.get(id=id)
     return render(request, 'despesa_detalhe.html', {'despesa': despesa})
+
 
 def atualizar_despesa_view(request, id):
     despesa = Despesas.objects.get(id=id)
@@ -98,6 +106,7 @@ def atualizar_despesa_view(request, id):
         form = CriarDespesaForm(instance=despesa)
 
     return render(request, 'atualizar_despesa.html', {'form': form, 'conta': conta, 'despesa': despesa})
+
 
 def deletar_despesa_view(request, id):
     despesa = Despesas.objects.get(id=id)

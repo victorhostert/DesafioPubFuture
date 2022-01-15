@@ -3,9 +3,10 @@ from contas.models import Contas
 from .models import Receitas
 from django.db.utils import OperationalError
 
+
 class CriarReceitaForm(forms.ModelForm):
     required_css_class = 'obrigatorio'
-    
+
     class Meta:
         model = Receitas
         fields = [
@@ -20,6 +21,7 @@ class CriarReceitaForm(forms.ModelForm):
             'dataRecebimentoEsperado': forms.DateInput(attrs={'placeholder': 'DD/MM/AAAA'}, format="%d/%m/%Y")
         }
 
+
 class FiltrarReceitaForm(forms.Form):
     contas_opcoes = [
         ('', 'Selecione uma conta')
@@ -30,12 +32,21 @@ class FiltrarReceitaForm(forms.Form):
     except OperationalError:
         contas_opcoes = []
 
-    valor_min = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor mínimo"}))
-    valor_max = forms.FloatField(required=False, widget=forms.TextInput(attrs={"placeholder": "Valor máximo"}))
-    tipo = forms.ChoiceField(required=False, choices=Receitas.opcoes_tipo_receita, label="Tipo")
-    descricao = forms.CharField(required=False, max_length=255, label="Descrição", widget=forms.TextInput(attrs={"placeholder": "Detalhes"}))
-    conta = forms.ChoiceField(required=False, choices=contas_opcoes, label="Conta")
-    data_recebimento_inicial = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
-    data_recebimento_final = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
-    data_esperado_inicial = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
-    data_esperado_final = forms.CharField(required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
+    valor_min = forms.FloatField(required=False, widget=forms.TextInput(
+        attrs={"placeholder": "Valor mínimo"}))
+    valor_max = forms.FloatField(required=False, widget=forms.TextInput(
+        attrs={"placeholder": "Valor máximo"}))
+    tipo = forms.ChoiceField(
+        required=False, choices=Receitas.opcoes_tipo_receita, label="Tipo")
+    descricao = forms.CharField(required=False, max_length=255, label="Descrição",
+                                widget=forms.TextInput(attrs={"placeholder": "Detalhes"}))
+    conta = forms.ChoiceField(
+        required=False, choices=contas_opcoes, label="Conta")
+    data_recebimento_inicial = forms.CharField(
+        required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
+    data_recebimento_final = forms.CharField(
+        required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
+    data_esperado_inicial = forms.CharField(
+        required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
+    data_esperado_final = forms.CharField(
+        required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))

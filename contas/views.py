@@ -6,6 +6,7 @@ from receitas.models import Receitas
 from .forms import CriarContaForm, TransferenciaForm, FiltrarContaForm
 from datetime import date
 
+
 def paginator(request, object, number):
     paginator = Paginator(object, number)
     page_number = request.GET.get('page')
@@ -15,8 +16,9 @@ def paginator(request, object, number):
         page_obj = None
     return page_obj
 
+
 def pesquisar_contas(request):
-    contas = Contas.objects.all().order_by('-id')   
+    contas = Contas.objects.all().order_by('-id')
     saldo_min = request.POST.get('saldo_min')
     saldo_max = request.POST.get('saldo_max')
     tipo_conta = request.POST.get('tipoConta')
@@ -27,14 +29,17 @@ def pesquisar_contas(request):
         saldo_min = 0
     if saldo_max == '':
         saldo_max = 9999999.99
-    resultado_filtro = contas.filter(saldo__gte=saldo_min, saldo__lte=saldo_max)
-    
+    resultado_filtro = contas.filter(
+        saldo__gte=saldo_min, saldo__lte=saldo_max)
+
     if tipo_conta and tipo_conta != '':
         resultado_filtro = contas.filter(tipoConta__iexact=tipo_conta)
     if inst_financeira and inst_financeira != '':
-        resultado_filtro = contas.filter(instituicaoFinanceira__icontains=inst_financeira)
+        resultado_filtro = contas.filter(
+            instituicaoFinanceira__icontains=inst_financeira)
 
     return resultado_filtro
+
 
 def detalhes_conta_view(request, id):
     conta = Contas.objects.get(id=id)
@@ -49,6 +54,7 @@ def detalhes_conta_view(request, id):
     }
     return render(request, 'detalhe_conta.html', context)
 
+
 def criar_conta_view(request):
     if request.method == 'POST':
         form = CriarContaForm(request.POST)
@@ -61,6 +67,7 @@ def criar_conta_view(request):
         'form': form,
     }
     return render(request, 'cadastro_conta.html', context)
+
 
 def atualizar_conta_view(request, id):
     conta = Contas.objects.get(id=id)
@@ -76,6 +83,7 @@ def atualizar_conta_view(request, id):
         'conta': conta
     }
     return render(request, 'atualizar_conta.html', context)
+
 
 def deletar_conta_view(request, id):
     conta = Contas.objects.get(id=id)
@@ -100,16 +108,16 @@ def transferencia_conta_view(request):
             Receitas.objects.create(
                 dataRecebimento=date.today(),
                 dataRecebimentoEsperado=date.today(),
-                valor = valor,
-                descricao = f'Transferência vinda de {conta1}',
-                tipoReceita = 'OU',
+                valor=valor,
+                descricao=f'Transferência vinda de {conta1}',
+                tipoReceita='OU',
                 conta=conta2
             )
             Despesas.objects.create(
                 dataPagamento=date.today(),
                 dataPagamentoEsperado=date.today(),
-                valor = valor,
-                tipoDespesa = 'OU',
+                valor=valor,
+                tipoDespesa='OU',
                 conta=conta1
             )
             conta1.save()
