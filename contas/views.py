@@ -131,8 +131,9 @@ def transferencia_conta_view(request):
 def filtrar_contas_view(request):
     if request.method == 'POST':
         form = FiltrarContaForm(request.POST)
-        contas = pesquisar_contas(request)
-        return render(request, 'resultados_filtro_contas.html', {'form': form, 'contas': contas})
+        if form.is_valid():
+            contas = pesquisar_contas(request)
+            return render(request, 'resultados_filtro_contas.html', {'form': form, 'contas': contas})
     else:
         form = FiltrarContaForm()
     return render(request, 'filtrar_contas.html', {'form': form})

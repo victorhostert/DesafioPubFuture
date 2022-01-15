@@ -135,8 +135,9 @@ def deletar_receita_view(request, id):
 def filtrar_receitas_view(request):
     if request.method == 'POST':
         form = FiltrarReceitaForm(request.POST)
-        receitas = pesquisar_receitas(request)
-        return render(request, 'resultados_filtro_receitas.html', {'form': form, 'receitas': receitas})
+        if form.is_valid():
+            receitas = pesquisar_receitas(request)
+            return render(request, 'resultados_filtro_receitas.html', {'form': form, 'receitas': receitas})
     else:
         form = FiltrarReceitaForm()
     return render(request, 'filtrar_receitas.html', {'form': form})

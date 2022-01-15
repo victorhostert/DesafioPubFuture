@@ -48,11 +48,11 @@ class FiltrarDespesaForm(forms.Form):
         required=False, choices=Despesas.opcoes_tipo_despesa, label="Tipo")
     conta = forms.ChoiceField(
         required=False, choices=contas_opcoes, label="Conta")
-    data_pagamento_inicial = forms.CharField(
+    data_pagamento_inicial = forms.DateField(
         required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
-    data_pagamento_final = forms.CharField(
+    data_pagamento_final = forms.DateField(
         required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
-    data_esperado_inicial = forms.CharField(
+    data_esperado_inicial = forms.DateField(
         required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
-    data_esperado_final = forms.CharField(
+    data_esperado_final = forms.DateField(
         required=False, max_length=255, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))

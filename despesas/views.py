@@ -123,8 +123,9 @@ def deletar_despesa_view(request, id):
 def filtrar_despesa_view(request):
     if request.method == 'POST':
         form = FiltrarDespesaForm(request.POST)
-        despesas = pesquisar_despesas(request)
-        return render(request, 'resultados_filtro_despesa.html', {'form': form, 'despesas': despesas})
+        if form.is_valid():
+            despesas = pesquisar_despesas(request)
+            return render(request, 'resultados_filtro_despesa.html', {'form': form, 'despesas': despesas})
     else:
         form = FiltrarDespesaForm()
     return render(request, 'filtrar_despesa.html', {'form': form})
