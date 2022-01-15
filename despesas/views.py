@@ -78,7 +78,7 @@ def cadastrar_despesa_view(request, id):
             conta.saldo -= instance.valor
             conta.save()
             instance.save()
-            return redirect('contas:detalhes', id=id)
+            return redirect('contas:detalhe', id=id)
     else:
         form = CriarDespesaForm()
 
@@ -87,7 +87,7 @@ def cadastrar_despesa_view(request, id):
 
 def detalhe_despesa_view(request, id):
     despesa = Despesas.objects.get(id=id)
-    return render(request, 'despesa_detalhe.html', {'despesa': despesa})
+    return render(request, 'detalhe_despesa.html', {'despesa': despesa})
 
 
 def atualizar_despesa_view(request, id):
@@ -115,7 +115,7 @@ def deletar_despesa_view(request, id):
         conta.saldo -= despesa.valor
         conta.save()
         despesa.delete()
-        return redirect('contas:detalhes', id=conta.id)
+        return redirect('contas:detalhe', id=conta.id)
     else:
         return render(request, 'deletar_despesa.html', {'despesa': despesa})
 

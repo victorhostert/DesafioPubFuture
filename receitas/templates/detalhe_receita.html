@@ -3,7 +3,7 @@
 {% block 'titulo' %}Administrador de Finanças{% endblock %}
 
 {% block 'conteudo' %}
-    <div class="receita">
+    <div class="detalhes_despesa_receita">
         <h1>Receita</h1>
         <h2>Tipo: {{receita.get_tipoReceita_display}}</h2>
         <p>Valor: R$ {{receita.valor|floatformat:2}}</p>

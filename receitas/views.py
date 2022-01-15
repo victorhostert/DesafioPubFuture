@@ -90,7 +90,7 @@ def cadastrar_receita_view(request, id):
             conta.saldo += instance.valor
             conta.save()
             instance.save()
-            return redirect('contas:detalhes', id=id)
+            return redirect('contas:detalhe', id=id)
     else:
         form = CriarReceitaForm()
 
@@ -99,7 +99,7 @@ def cadastrar_receita_view(request, id):
 
 def detalhe_receita_view(request, id):
     receita = Receitas.objects.get(id=id)
-    return render(request, 'receita_detalhe.html', {'receita': receita})
+    return render(request, 'detalhe_receita.html', {'receita': receita})
 
 
 def atualizar_receita_view(request, id):
@@ -127,7 +127,7 @@ def deletar_receita_view(request, id):
         conta.saldo -= receita.valor
         conta.save()
         receita.delete()
-        return redirect('contas:detalhes', id=conta.id)
+        return redirect('contas:detalhe', id=conta.id)
     else:
         return render(request, 'deletar_receita.html', {'receita': receita})
 

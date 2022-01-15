@@ -292,10 +292,9 @@ button:hover{
     padding: 2em;     
     margin: -2em;
 }
-.despesa,
-.receita{
-    background-color: var(--cor-branco);
-    color: var(--cor-links);
+.detalhes_despesa_receita{
+    background-color: var(--cor-bg-escuro);
+    color: var(--cor-branco);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -305,8 +304,7 @@ button:hover{
     width: 50%;
     margin: 80px auto;
 }
-.despesa *,
-.receita *{
+.detalhes_despesa_receita *{
     padding: 20px;
     text-align: center;
 }
@@ -341,22 +339,26 @@ button:hover{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    justify-content: center;
 }
-.deletar_objeto button{
-    margin: 10px 0px 0px;   
-    border-radius: 5px;
-    padding: 20px;
-    margin: 5px;
-    padding: 15px;
-    font-family: 'Exo 2', sans-serif;
-    font-size: 1.1em;
-}
-.deletar_objeto h1, h2{
+.deletar_objeto *{
+    margin-block: 50px;
     text-align: center;
 }
-.deletar_objeto_buttons button{
+.deletar_objeto_buttons{
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 50%;
+    justify-content: space-around;
+}
+.deletar_objeto_buttons form{
+    width: fit-content;
+    margin: 0;
+    margin-inline: 0;
+}
+.deletar_objeto_buttons button, form{
+    height: 100%;
     display: block;
 }
 .errorlist{

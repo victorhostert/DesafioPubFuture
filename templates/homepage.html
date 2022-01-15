@@ -14,9 +14,9 @@
             </tr>
             {% for conta in contas %}
                 <tr>
-                    <td><a href="{% url 'contas:detalhes' conta.id %}">{{conta.instituicaoFinanceira}}</a></td>
-                    <td><a href="{% url 'contas:detalhes' conta.id %}">{{conta.get_tipoConta_display}}</a></td>
-                    <td><a href="{% url 'contas:detalhes' conta.id %}">R$ {{conta.saldo|floatformat:2}}</a></td>
+                    <td><a href="{% url 'contas:detalhe' conta.id %}">{{conta.instituicaoFinanceira}}</a></td>
+                    <td><a href="{% url 'contas:detalhe' conta.id %}">{{conta.get_tipoConta_display}}</a></td>
+                    <td><a href="{% url 'contas:detalhe' conta.id %}">R$ {{conta.saldo|floatformat:2}}</a></td>
                 </tr>
             {% endfor %}
         </table>

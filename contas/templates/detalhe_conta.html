@@ -18,13 +18,21 @@
                     <th>Data Recebimento</th>
                     <th>Data Recebimento Esperado</th>
                     <th>Valor</th>
+                    <th>Atualizar</th>
+                    <th>Deletar</th>
                 </tr>
                 {% for receita in receitas %}
                 <tr>
                     <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.get_tipoReceita_display}}</a></td>
                     <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.dataRecebimento}}</a></td>
-                    <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.dataRecebimentoEsperado}}</a></td>
+                    {% if receita.dataRecebimentoEsperado %}
+                        <td><a href="{% url 'receitas:detalhe' receita.id %}">{{receita.dataRecebimentoEsperado}}</a></td>
+                    {% else %}
+                        <td><a href="{% url 'receitas:detalhe' receita.id %}">Nenhuma</a></td>
+                    {% endif %}
                     <td><a href="{% url 'receitas:detalhe' receita.id %}">R$ {{receita.valor|floatformat:2}}</a></td>
+                    <td><a href="{% url 'receitas:atualizar' receita.id %}"><i class="fas fa-pen-alt"></i></a></td>
+                    <td><a href="{% url 'receitas:deletar' receita.id %}"><i class="fas fa-trash-alt"></i></a></td>
                 </tr>
                 {% endfor %}
             </table>
@@ -68,13 +76,21 @@
                         <th>Data Recebimento</th>
                         <th>Data Recebimento Esperado</th>
                         <th>Valor</th>
+                        <th>Atualizar</th>
+                        <th>Deletar</th>
                     </tr>
                     {% for despesa in despesas %}
                         <tr>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.get_tipoDespesa_display}}</a></td>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.dataPagamento}}</a></td>
-                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.dataPagamentoEsperado}}</a></td>
+                            {% if despesa.dataPagamentoEsperado %}
+                                <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{despesa.dataPagamentoEsperado}}</a></td>
+                            {% else %}
+                                <td><a href="{% url 'despesas:detalhe' despesa.id %}">Nenhuma</a></td>
+                            {% endif %}                            
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">R$ {{despesa.valor|floatformat:2}}</a></td>
+                            <td><a href="{% url 'despesas:atualizar' despesa.id %}"><i class="fas fa-pen-alt"></i></a></td>
+                            <td><a href="{% url 'despesas:deletar' despesa.id %}"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
                     {% endfor %}
                 </table>

@@ -19,9 +19,9 @@
                 {% for conta in contas %}
                     <div class="resultado">
                         <tr>
-                            <td><a href="{% url 'contas:detalhes' conta.id %}">{{ conta.instituicaoFinanceira }}</a></td>
-                            <td><a href="{% url 'contas:detalhes' conta.id %}">{{ conta.get_tipoConta_display }}</a></td>
-                            <td><a href="{% url 'contas:detalhes' conta.id %}">R$ {{ conta.saldo|floatformat:2 }}</a></td>
+                            <td><a href="{% url 'contas:detalhe' conta.id %}">{{ conta.instituicaoFinanceira }}</a></td>
+                            <td><a href="{% url 'contas:detalhe' conta.id %}">{{ conta.get_tipoConta_display }}</a></td>
+                            <td><a href="{% url 'contas:detalhe' conta.id %}">R$ {{ conta.saldo|floatformat:2 }}</a></td>
                             <td><a href="{% url 'contas:atualizar' conta.id %}"><i class="fas fa-pen-alt"></i></a></td>
                             <td><a href="{% url 'contas:deletar' conta.id %}"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
