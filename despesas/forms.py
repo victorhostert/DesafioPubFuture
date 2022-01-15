@@ -35,10 +35,10 @@ class FiltrarDespesaForm(forms.Form):
         ('', 'Selecione uma conta')
     ]
     try:
-        for conta in Contas.objects.all().order_by('id'):
+        for conta in Contas.objects.all():
             contas_opcoes.append((conta.id, conta))
     except OperationalError:
-        contas_opcoes = []
+        pass
 
     valor_min = forms.FloatField(required=False, widget=forms.TextInput(
         attrs={"placeholder": "Valor mínimo"}))

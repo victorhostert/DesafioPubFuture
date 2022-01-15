@@ -14,16 +14,13 @@ class CriarContaForm(forms.ModelForm):
 
 class TransferenciaForm(forms.Form):
     required_css_class = 'obrigatorio'
+    opcoes_contas = [('', 'Selecione uma conta')]
 
     try:
-        contas = tuple(Contas.objects.all())
+        for conta in Contas.objects.all():
+            opcoes_contas.append((conta.id, conta))
     except OperationalError:
-        contas = []
-
-    opcoes_contas = []
-    for conta in contas:
-        opcao = (conta.id, conta)
-        opcoes_contas.append(opcao)
+        pass
 
     conta1 = forms.ChoiceField(
         choices=opcoes_contas, label='Conta a ser debidata')
