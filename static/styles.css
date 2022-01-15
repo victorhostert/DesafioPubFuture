@@ -123,7 +123,7 @@ button:hover{
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .introducao{
     width: 40%;
@@ -219,7 +219,7 @@ button:hover{
     width: fit-content;
     font-weight: 600;
     font-style: italic;
-    margin-top: 20px;
+    margin: 20px auto;
     
 }
 .saldo_field p{

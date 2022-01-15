@@ -22,7 +22,7 @@
                     <div class="resultado">
                         <tr>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.conta }}</a></td>
-                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.get_tipodespesa_display }}</a></td>
+                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.get_tipoDespesa_display }}</a></td>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">R$ {{ despesa.valor|floatformat:2 }}</a></td>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.dataPagamento }}</a></td>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.dataPagamentoEsperado }}</a></td>

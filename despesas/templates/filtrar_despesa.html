@@ -8,22 +8,23 @@
         <h1>Filtrar despesas</h1>
         <form action="{% url 'despesas:filtrar' %}" method="post">
             {% csrf_token %}
-            {% if form.errors %}
-                <ul class="errors">
-                    {% for error in form.errors %}
-                        <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-
-            {% csrf_token %}
             {% for field in form %}
                 {% if field.name != "valor_min" and field.name != "valor_max" %}
+                    {% if form.errors %}
+                        {% for error in field.errors %}
+                            <strong class="errorList">{{ error|escape }}</strong>
+                        {% endfor %}
+                    {% endif %}
                     <label>{{ field.label }}</label>
                     {{ field }}
                 {% endif %}
             {% endfor %}
             <div class="saldo_field">
+                {% if form.errors %}
+                    {% for error in field.errors %}
+                        <strong class="errorList">{{ error|escape }}</strong>
+                    {% endfor %}
+                {% endif %}
                 <p>Valor</p>
                 <p>{{ form.valor_min }} {{ form.valor_max }}</p>
             </div>
@@ -34,8 +35,8 @@
 <script>
     $('#id_valor_min').mask('###.00', {reverse: true});
     $('#id_valor_max').mask('###.00', {reverse: true});
-    $('#id_data_pagamento_inicial').mask('00/00/0000');
-    $('#id_data_pagamento_final').mask('00/00/0000');
+    $('#id_data_recebimento_inicial').mask('00/00/0000');
+    $('#id_data_recebimento_final').mask('00/00/0000');
     $('#id_data_esperado_inicial').mask('00/00/0000');
     $('#id_data_esperado_final').mask('00/00/0000');
 </script>

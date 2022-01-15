@@ -30,7 +30,7 @@ class FiltrarReceitaForm(forms.Form):
             opcoes_contas.append((conta.id, conta))
     except OperationalError:
         pass
-    
+
     valor_min = forms.FloatField(required=False, widget=forms.TextInput(
         attrs={"placeholder": "Valor mínimo"}))
     valor_max = forms.FloatField(required=False, widget=forms.TextInput(
@@ -49,3 +49,12 @@ class FiltrarReceitaForm(forms.Form):
         required=False, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
     data_esperado_final = forms.DateField(
         required=False, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
+
+    def clean_valor_max(self):
+        valor_max = self.cleaned_data.get('valor_max')
+        valor_min = self.cleaned_data.get('valor_min')
+        if valor_max and valor_min:
+            if valor_max < valor_min:
+                raise forms.ValidationError(
+                    'O valor máximo deve ser maior que o valor mínimo')
+        return valor_max

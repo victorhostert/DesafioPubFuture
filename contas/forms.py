@@ -54,3 +54,12 @@ class FiltrarContaForm(forms.Form):
         required=False, choices=Contas.opcoes_tipo_conta, label="Tipo da conta")
     instituicaoFinanceira = forms.CharField(required=False, max_length=255, label="Instituição Financeira", widget=forms.TextInput(
         attrs={"placeholder": "Digite seu banco"}))
+
+    def clean_saldo_max(self):
+        saldo_max = self.cleaned_data.get('saldo_max')
+        saldo_min = self.cleaned_data.get('saldo_min')
+        if saldo_max and saldo_min:
+            if saldo_max < saldo_min:
+                raise forms.ValidationError(
+                    'O saldo máximo deve ser maior que o saldo mínimo')
+        return saldo_max
