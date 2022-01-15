@@ -18,6 +18,7 @@
 a {
     text-decoration: none;
     color: inherit;
+    z-index: 1;
 }
 body {
     background: rgb(63,94,251);
@@ -43,9 +44,18 @@ table th:last-child {
 table th:first-child{
     border-top-left-radius: 10px;
 }
+form{
+    margin-block-end: 0;
+    margin: 0px;
+}
 button{
     padding: 20px;
     border-radius: 20px;
+    background-color: var(--cor-bg-claro);
+    color: var(--cor-branco);
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
 }
 button:hover{
     cursor: pointer;
@@ -108,8 +118,7 @@ button:hover{
 .wrapper, .wrapper_homepage{
     min-height: 65%;
     max-width: 60%;
-    background: rgb(15,104,76);
-    background: linear-gradient(125deg, rgba(15,104,76,1) 21%, rgba(14,14,14,1) 100%);
+    background: var(--cor-bg-escuro);
     margin: 20px auto;
     padding: 30px;
     border-radius: 20px;
