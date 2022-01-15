@@ -17,4 +17,4 @@ class Contas(models.Model):
         max_length=255, verbose_name='Instituição Financeira')
 
     def __str__(self) -> str:
-        return f'{self.instituicaoFinanceira} - {self.tipoConta}'
+        return f'{self.instituicaoFinanceira} - {self.get_tipoConta_display()}'

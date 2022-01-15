@@ -26,4 +26,4 @@ class Despesas(models.Model):
         max_length=2, choices=opcoes_tipo_despesa, verbose_name='Tipo')
 
     def __str__(self) -> str:
-        return f'{self.tipoDespesa} - {self.valor}'
+        return f'{self.get_tipoDespesa_display()} - R$ {self.valor}'

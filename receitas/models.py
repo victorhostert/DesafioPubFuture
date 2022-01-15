@@ -24,4 +24,4 @@ class Receitas(models.Model):
         max_length=50, choices=opcoes_tipo_receita, verbose_name='Tipo')
 
     def __str__(self) -> str:
-        return f'{self.tipoReceita} - {self.valor}'
+        return f'{self.get_tipoReceita_display()} - R$ {self.valor}'
