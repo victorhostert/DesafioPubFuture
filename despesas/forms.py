@@ -31,23 +31,13 @@ class CriarDespesaForm(forms.ModelForm):
 
 
 class FiltrarDespesaForm(forms.Form):
-    contas_opcoes = [
-        ('', 'Selecione uma conta')
-    ]
-    try:
-        for conta in Contas.objects.all():
-            contas_opcoes.append((conta.id, conta))
-    except OperationalError:
-        pass
-
     valor_min = forms.FloatField(required=False, widget=forms.TextInput(
         attrs={"placeholder": "Valor mínimo"}))
     valor_max = forms.FloatField(required=False, widget=forms.TextInput(
         attrs={"placeholder": "Valor máximo"}))
     tipo = forms.ChoiceField(
         required=False, choices=Despesas.opcoes_tipo_despesa, label="Tipo")
-    conta = forms.ChoiceField(
-        required=False, choices=contas_opcoes, label="Conta")
+    conta = forms.ModelChoiceField(Contas.objects.all())
     data_pagamento_inicial = forms.DateField(
         required=False, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
     data_pagamento_final = forms.DateField(

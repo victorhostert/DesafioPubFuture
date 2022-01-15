@@ -39,8 +39,7 @@ class FiltrarReceitaForm(forms.Form):
         required=False, choices=Receitas.opcoes_tipo_receita, label="Tipo")
     descricao = forms.CharField(required=False, max_length=255, label="Descrição",
                                 widget=forms.TextInput(attrs={"placeholder": "Detalhes"}))
-    conta = forms.ChoiceField(
-        required=False, choices=opcoes_contas, label="Conta")
+    conta = forms.ModelChoiceField(Contas.objects.all())
     data_recebimento_inicial = forms.DateField(
         required=False, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
     data_recebimento_final = forms.DateField(
