@@ -20,12 +20,16 @@
                 {% endif %}
             {% endfor %}
             <div class="saldo_field">
+                <p>Valor</p>
                 {% if form.errors %}
-                    {% for error in field.errors %}
-                        <strong class="errorList">{{ error|escape }}</strong>
+                    {% for field in form %}
+                        {% if field.name == "valor_min" or field.name == "valor_max" %}
+                            {% for error in field.errors %}
+                                <strong class="errorList">{{ error|escape }}</strong>
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
-                <p>Valor</p>
                 <p>{{ form.valor_min }} {{ form.valor_max }}</p>
             </div>
             <button type="submit">Pesquisar</button>

@@ -20,12 +20,16 @@
                 {% endif %}
             {% endfor %}
             <div class="saldo_field">
+                <p>Valor</p>
                 {% if form.errors %}
-                    {% for error in field.errors %}
-                        <strong class="errorList">{{ error|escape }}</strong>
+                    {% for field in form %}
+                        {% if field.name == "valor_min" or field.name == "valor_max" %}
+                            {% for error in field.errors %}
+                                <strong class="errorList">{{ error|escape }}</strong>
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
-                <p>Valor</p>
                 <p>{{ form.valor_min }} {{ form.valor_max }}</p>
             </div>
             <button type="submit">Pesquisar</button>
@@ -35,8 +39,8 @@
 <script>
     $('#id_valor_min').mask('###.00', {reverse: true});
     $('#id_valor_max').mask('###.00', {reverse: true});
-    $('#id_data_recebimento_inicial').mask('00/00/0000');
-    $('#id_data_recebimento_final').mask('00/00/0000');
+    $('#id_data_pagamento_inicial').mask('00/00/0000');
+    $('#id_data_pagamento_final').mask('00/00/0000');
     $('#id_data_esperado_inicial').mask('00/00/0000');
     $('#id_data_esperado_final').mask('00/00/0000');
 </script>
