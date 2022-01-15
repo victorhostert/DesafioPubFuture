@@ -6,8 +6,12 @@ from contas.views import paginator
 def homepage(request):
     contas = Contas.objects.all()
     saldo_total = 0
-    for conta in contas:
-        saldo_total += conta.saldo
+    if contas:
+        for conta in contas:
+            saldo_total += conta.saldo
+    else:
+        contas = []
+
     contas = paginator(request, contas, 10)
     context = {
         'contas': contas,
