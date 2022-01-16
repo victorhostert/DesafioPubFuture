@@ -25,7 +25,11 @@
                             <td><a href="{% url 'receitas:detalhe' receita.id %}">{{ receita.get_tipoReceita_display }}</a></td>
                             <td><a href="{% url 'receitas:detalhe' receita.id %}">R$ {{ receita.valor|floatformat:2 }}</a></td>
                             <td><a href="{% url 'receitas:detalhe' receita.id %}">{{ receita.dataRecebimento }}</a></td>
-                            <td><a href="{% url 'receitas:detalhe' receita.id %}">{{ receita.dataRecebimentoEsperado }}</a></td>
+                            {% if receita.dataRecebimentoEsperado %}
+                                <td><a href="{% url 'receitas:detalhe' receita.id %}">{{ receita.dataRecebimentoEsperado }}</a></td>
+                            {% else %}
+                                <td><a href="{% url 'receitas:detalhe' receita.id %}">Nenhuma</a></td>
+                            {% endif %}
                             <td><a href="{% url 'receitas:atualizar' receita.id %}"><i class="fas fa-pen-alt"></i></a></td>
                             <td><a href="{% url 'receitas:deletar' receita.id %}"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
@@ -36,8 +40,10 @@
         <a href="{% url 'receitas:filtrar' %}"><button>Fazer outra pesquisa</button></a>   
     </div>
     {% else %}
-        <h1>Sua pesquisa não gerou resultados</h1>
-        <a href="{% url 'receitas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
+        <div class="nao_gerou_resultados">
+            <h1>Sua pesquisa não gerou resultados</h1>
+            <a href="{% url 'receitas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

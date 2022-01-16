@@ -25,7 +25,11 @@
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.get_tipoDespesa_display }}</a></td>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">R$ {{ despesa.valor|floatformat:2 }}</a></td>
                             <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.dataPagamento }}</a></td>
-                            <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.dataPagamentoEsperado }}</a></td>
+                            {% if despesa.dataRecebimentoEsperado %}
+                                <td><a href="{% url 'despesas:detalhe' despesa.id %}">{{ despesa.dataRecebimentoEsperado }}</a></td>
+                            {% else %}
+                                <td><a href="{% url 'despesas:detalhe' despesa.id %}">Nenhuma</a></td>
+                            {% endif %}
                             <td><a href="{% url 'despesas:atualizar' despesa.id %}"><i class="fas fa-pen-alt"></i></a></td>
                             <td><a href="{% url 'despesas:deletar' despesa.id %}"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
@@ -36,8 +40,10 @@
         <a href="{% url 'despesas:filtrar' %}"><button>Fazer outra pesquisa</button></a>   
     </div>
     {% else %}
-        <h1>Sua pesquisa não gerou resultados</h1>
-        <a href="{% url 'despesas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
+        <div class="nao_gerou_resultados">
+            <h1>Sua pesquisa não gerou resultados</h1>
+            <a href="{% url 'receitas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

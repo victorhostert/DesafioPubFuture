@@ -32,8 +32,10 @@
         <a href="{% url 'contas:filtrar' %}"><button>Fazer outra pesquisa</button></a>   
     </div>
     {% else %}
-        <h1>Sua pesquisa não gerou resultados</h1>
-        <a href="{% url 'contas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
+        <div class="nao_gerou_resultados">
+            <h1>Sua pesquisa não gerou resultados</h1>
+            <a href="{% url 'receitas:filtrar' %}"><button>Clique aqui para pesquisar por outros termos</button></a>
+        </div>
     {% endif %}
 </div>
 {% endblock %}

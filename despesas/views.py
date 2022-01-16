@@ -101,7 +101,7 @@ def atualizar_despesa_view(request, id):
             conta.saldo -= form.cleaned_data['valor']
             conta.save()
             form.save()
-            return redirect('despesas:detalhe', despesa.id)
+            return redirect('contas:detalhe', conta.id)
     else:
         form = CriarDespesaForm(instance=despesa)
 
