@@ -110,7 +110,7 @@ def atualizar_receita_view(request, id):
         form = CriarReceitaForm(request.POST, instance=receita)
         form.conta = conta
         if form.is_valid():
-            conta.saldo -= form.cleaned_data['valor']
+            conta.saldo += form.cleaned_data['valor']
             conta.save()
             form.save()
             return redirect('receitas:detalhe', receita.id)

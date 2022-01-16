@@ -112,7 +112,7 @@ def deletar_despesa_view(request, id):
     despesa = Despesas.objects.get(id=id)
     if request.method == 'POST':
         conta = despesa.conta
-        conta.saldo -= despesa.valor
+        conta.saldo += despesa.valor
         conta.save()
         despesa.delete()
         return redirect('contas:detalhe', id=conta.id)
