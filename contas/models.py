@@ -10,7 +10,7 @@ class Contas(models.Model):
         ('PO', 'Poupança')
     ]
 
-    saldo = models.FloatField()
+    saldo = models.DecimalField(max_digits=15, decimal_places=2)
     tipoConta = models.CharField(
         max_length=2, choices=opcoes_tipo_conta, verbose_name='Tipo de Conta')
     instituicaoFinanceira = models.CharField(

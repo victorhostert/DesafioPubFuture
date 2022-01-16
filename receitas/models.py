@@ -13,7 +13,7 @@ class Receitas(models.Model):
         ('OU', 'Outros')
     ]
 
-    valor = models.FloatField()
+    valor = models.DecimalField(max_digits=15, decimal_places=2)
     dataRecebimento = models.DateField(verbose_name='Data recebimento')
     dataRecebimentoEsperado = models.DateField(
         verbose_name='Data esperada para recebimento', null=True, blank=True)

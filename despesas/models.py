@@ -17,7 +17,7 @@ class Despesas(models.Model):
         ('OU', 'Outros')
     ]
 
-    valor = models.FloatField()
+    valor = models.DecimalField(max_digits=15, decimal_places=2)
     dataPagamento = models.DateField(verbose_name='Data pagamento')
     dataPagamentoEsperado = models.DateField(
         verbose_name='Data pagamento esperado', null=True, blank=True)
