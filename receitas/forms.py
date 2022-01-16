@@ -23,14 +23,6 @@ class CriarReceitaForm(forms.ModelForm):
 
 
 class FiltrarReceitaForm(forms.Form):
-    opcoes_contas = [('', 'Selecione uma conta')]
-    try:
-        contas = Contas.objects.all()
-        for conta in contas:
-            opcoes_contas.append((conta.id, conta))
-    except OperationalError:
-        pass
-
     valor_min = forms.FloatField(required=False, widget=forms.TextInput(
         attrs={"placeholder": "Valor mínimo"}))
     valor_max = forms.FloatField(required=False, widget=forms.TextInput(
@@ -39,7 +31,7 @@ class FiltrarReceitaForm(forms.Form):
         required=False, choices=Receitas.opcoes_tipo_receita, label="Tipo")
     descricao = forms.CharField(required=False, max_length=255, label="Descrição",
                                 widget=forms.TextInput(attrs={"placeholder": "Detalhes"}))
-    conta = forms.ModelChoiceField(Contas.objects.all())
+    conta = forms.ModelChoiceField(Contas.objects.all(), required=False)
     data_recebimento_inicial = forms.DateField(
         required=False, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
     data_recebimento_final = forms.DateField(
