@@ -23,7 +23,7 @@ a {
 body {
     background: rgb(63,94,251);
     background: linear-gradient(135deg, var(--cor-bg-escuro) 0%, var(--cor-bg-claro) 100%);
-    color: white;
+    color: var(--cor-branco);
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
@@ -126,6 +126,7 @@ button:hover{
 .wrapper h1, h2{
     margin: 20px;
     font-weight: normal;
+    text-align: center;
 }
 .wrapper_homepage{
     margin: 0 auto;
@@ -153,6 +154,9 @@ button:hover{
 }
 .introducao h1{
     font-size: 300%;
+}
+.introducao a{
+    margin: 0 auto;
 }
 .introducao button{
     padding: 20px;
@@ -204,6 +208,11 @@ button:hover{
     text-align: left;
     padding: 10px;
     color: black;
+}
+.receitas_despesas_conta:nth-child(3){
+    margin-top: 80px;
+    border-top: 1px solid var(--cor-branco);
+    border-radius: 0px;
 }
 .tabela_titulo{
     font-size: 1.8rem;
@@ -364,6 +373,15 @@ button:hover{
 .deletar_objeto_buttons button form{
     height: 100%;
     display: block;
+}
+.nao_gerou_resultados{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.nao_gerou_resultados a{
+    margin: 0 auto;
 }
 .errorlist{
     color: tomato;
