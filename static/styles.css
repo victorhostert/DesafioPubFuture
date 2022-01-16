@@ -29,6 +29,8 @@ body {
     flex-direction: column;
     flex-wrap: nowrap;
 }
+
+/* Formatação de tabelas */
 td, th{
     border: none;
 }
@@ -44,6 +46,7 @@ table th:last-child {
 table th:first-child{
     border-top-left-radius: 10px;
 }
+
 form{
     margin-block-end: 0;
     margin: 0px;
@@ -60,6 +63,7 @@ button{
 button:hover{
     cursor: pointer;
 }
+/* Estilização do header */
 .header{
     height: 50px;
     display: flex;
@@ -105,13 +109,14 @@ button:hover{
 .dropbtn{
     cursor: pointer;
 }
-
 .show {
     display: block;
 }
 .links_nav{
     overflow: hidden;
 }
+
+/* Estilização do wrapper */
 .wrapper_main{
     min-height: calc(100vh - 80px);
 }
@@ -140,6 +145,8 @@ button:hover{
 .wrapper_homepage h1{
     text-align: center;
 }
+
+/* Estilização da página de introdução, na homepage */
 .introducao{
     width: 40%;
     margin: 0 auto;
@@ -161,6 +168,8 @@ button:hover{
 .introducao button{
     padding: 20px;
 }
+
+/* Estilização das tabelas */
 .contas_homepage{
     width: 100%;
     margin: 5px auto;
@@ -233,6 +242,7 @@ button:hover{
 .detalhe_conta table{
     max-width: 80%;
 }
+
 .pagination{
     margin: 20px auto;
     width: fit-content;
@@ -250,6 +260,8 @@ button:hover{
     flex-direction: row;
     flex-wrap: nowrap;
 }
+
+/* Estilização dos formulários */
 .formulario{
     padding: 10px;
 }
@@ -306,6 +318,7 @@ button:hover{
     padding: 2em;     
     margin: -2em;
 }
+
 .detalhes_despesa_receita{
     background-color: var(--cor-bg-escuro);
     color: var(--cor-branco);
@@ -383,10 +396,13 @@ button:hover{
 .nao_gerou_resultados a{
     margin: 0 auto;
 }
+
+/* Estilização dos erros nos formulários */
 .errorlist{
     color: tomato;
     list-style: none;
 }
+
 .footer{
     height: 30px;
     text-align: center;

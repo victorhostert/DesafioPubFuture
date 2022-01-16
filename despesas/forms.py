@@ -5,6 +5,15 @@ from .models import Despesas
 
 
 class CriarDespesaForm(forms.ModelForm):
+    """
+    Formulário para criação de despesas
+
+    Args:
+        forms (ModelForm): Cria um formulário baseado em um model
+
+    Raises:
+        forms.ValidationError: Verifica se o valor da despesa é inferior ao saldo disponível
+    """
     required_css_class = 'obrigatorio'
 
     class Meta:
@@ -31,6 +40,15 @@ class CriarDespesaForm(forms.ModelForm):
 
 
 class FiltrarDespesaForm(forms.Form):
+    """
+    Formulário para filtro de despesas, com todos os campos possíveis
+
+    Args:
+        forms (Form): Formulário padrão do Django Forms
+
+    Raises:
+        forms.ValidationError: Verifica se o valor máximo é superior ao valor mínimo
+    """
     valor_min = forms.FloatField(required=False, widget=forms.TextInput(
         attrs={"placeholder": "Valor mínimo"}))
     valor_max = forms.FloatField(required=False, widget=forms.TextInput(

@@ -5,6 +5,16 @@ from .models import Receitas
 
 
 def formatar_datas(data):
+    """
+    Recebe datas no formato dd/mm/YYYY
+    e as retorna no formato YYYY-mm-dd
+
+    Args:
+        data (string): Datas conforme vindas do formulário
+
+    Returns:
+        string: Data formatada para YYYY-mm-dd
+    """
     if '/' in data:
         dia = data[0:2]
         mes = data[3:5]
@@ -14,6 +24,15 @@ def formatar_datas(data):
 
 
 def pesquisar_receitas(request):
+    """
+    Filtra o model Receitas retornando um queryset contendo o que passou nos filtros
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        QuerySet: Contém o resultado dos filtros 
+    """
     receitas = Receitas.objects.all().order_by('id')
     valor_min = request.POST.get('valor_min')
     valor_max = request.POST.get('valor_max')
@@ -81,6 +100,15 @@ def pesquisar_receitas(request):
 
 
 def cadastrar_receita_view(request, id):
+    """
+    Baseado no CriarReceitaForm, renderiza um formulário e salva as informações ao receber uma requisição POST
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        HttpResponse: Resposta Http contendo o formulário e uma página .html a ser renderizada
+    """
     conta = Contas.objects.get(id=id)
     if request.method == 'POST':
         form = CriarReceitaForm(request.POST)
@@ -98,11 +126,31 @@ def cadastrar_receita_view(request, id):
 
 
 def detalhe_receita_view(request, id):
+    """
+    Renderiza uma página contendo informações sobre uma receitaa
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da receita a ser exibida
+
+    Returns:
+        HttpResponse: Resposta Http contendo o contexto e uma página .html a ser renderizada
+    """
     receita = Receitas.objects.get(id=id)
     return render(request, 'detalhe_receita.html', {'receita': receita})
 
 
 def atualizar_receita_view(request, id):
+    """
+    Atualiza uma Receita, capturando a instância através de um ID
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da despesa a ser atualizada
+
+    Returns:
+        HttpResponse: Resposta Http contendo o formulário e uma página .html a ser renderizada
+    """
     receita = Receitas.objects.get(id=id)
     conta = receita.conta
     if request.method == 'POST':
@@ -121,6 +169,16 @@ def atualizar_receita_view(request, id):
 
 
 def deletar_receita_view(request, id):
+    """
+    Deleta uma receita, após exigir mais uma confirmação
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da receita a ser deletada
+
+    Returns:
+        HttpResponse: Resposta Http e a página .html a ser renderizada
+    """
     receita = Receitas.objects.get(id=id)
     if request.method == 'POST':
         conta = receita.conta
@@ -133,6 +191,16 @@ def deletar_receita_view(request, id):
 
 
 def filtrar_receitas_view(request):
+    """
+    Utiliza a função pesquisar_receitas e o FiltrarReceitaForm para retornar um queryset,
+    contendo os resultados do filtro
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        HttpResponse: Resposta Http, formulário e a página .html a ser renderizada
+    """
     if request.method == 'POST':
         form = FiltrarReceitaForm(request.POST)
         if form.is_valid():

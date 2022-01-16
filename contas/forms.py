@@ -5,6 +5,12 @@ from .models import Contas
 
 
 class CriarContaForm(forms.ModelForm):
+    """
+    Cria um formulário baseado no model Contas, com todos os campos
+
+    Args:
+        forms (ModelForm): Cria um formulário baseado em um model
+    """
     required_css_class = 'obrigatorio'
 
     class Meta:
@@ -13,6 +19,19 @@ class CriarContaForm(forms.ModelForm):
 
 
 class TransferenciaForm(forms.Form):
+    """
+    Cria o formulário para transferência de contas, também validando os dados
+
+    Args:
+        forms (Form): Formulário padrão do Django Forms
+
+    Raises:
+        forms.ValidationError: Verifica se as contas são diferentes
+        forms.ValidationError: Verifica se a conta a ser debitada possui saldo suficiente
+
+    Returns:
+        attrs: retorna os atributos validados a serem consumidos na view
+    """
     required_css_class = 'obrigatorio'
 
     conta_a_ser_debitada = forms.ModelChoiceField(Contas.objects.all())
@@ -36,6 +55,18 @@ class TransferenciaForm(forms.Form):
 
 
 class FiltrarContaForm(forms.Form):
+    """
+    Formulário para filtro de contas, com todos os campos possíveis
+
+    Args:
+        forms (Form): Formulário padrão do Django Forms
+
+    Raises:
+        forms.ValidationError: Verifica se o saldo máximo é superior ao saldo mínimo
+
+    Returns:
+        attrs: retorna os atributos validados a serem consumidos na view
+    """
     saldo_min = forms.FloatField(required=False, widget=forms.TextInput(
         attrs={"placeholder": "Valor mínimo"}))
     saldo_max = forms.FloatField(required=False, widget=forms.TextInput(

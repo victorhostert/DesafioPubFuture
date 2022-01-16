@@ -6,6 +6,15 @@ from receitas.views import formatar_datas
 
 
 def pesquisar_despesas(request):
+    """
+    Filtra o model Despesas retornando um queryset contendo o que passou nos filtros
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        QuerySet: Contém o resultado dos filtros 
+    """
     despesas = Despesas.objects.all().order_by('id')
     valor_min = request.POST.get('valor_min')
     valor_max = request.POST.get('valor_max')
@@ -68,6 +77,15 @@ def pesquisar_despesas(request):
 
 
 def cadastrar_despesa_view(request, id):
+    """
+    Baseado no CriarDespesaForm, renderiza um formulário e salva as informações ao receber uma requisição POST
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        HttpResponse: Resposta Http contendo o formulário e uma página .html a ser renderizada
+    """
     conta = Contas.objects.get(id=id)
     if request.method == 'POST':
         form = CriarDespesaForm(request.POST)
@@ -86,11 +104,31 @@ def cadastrar_despesa_view(request, id):
 
 
 def detalhe_despesa_view(request, id):
+    """
+    Renderiza uma página contendo informações sobre uma despesa
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da despesa a ser exibida
+
+    Returns:
+        HttpResponse: Resposta Http contendo o contexto e uma página .html a ser renderizada
+    """
     despesa = Despesas.objects.get(id=id)
     return render(request, 'detalhe_despesa.html', {'despesa': despesa})
 
 
 def atualizar_despesa_view(request, id):
+    """
+    Atualiza uma Despesa, capturando a instância através de um ID
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da despesa a ser atualizada
+
+    Returns:
+        HttpResponse: Resposta Http contendo o formulário e uma página .html a ser renderizada
+    """
     despesa = Despesas.objects.get(id=id)
     conta = despesa.conta
     if request.method == 'POST':
@@ -109,6 +147,16 @@ def atualizar_despesa_view(request, id):
 
 
 def deletar_despesa_view(request, id):
+    """
+    Deleta uma despesa, após exigir mais uma confirmação
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da despesa a ser deletada
+
+    Returns:
+        HttpResponse: Resposta Http e a página .html a ser renderizada
+    """
     despesa = Despesas.objects.get(id=id)
     if request.method == 'POST':
         conta = despesa.conta
@@ -121,6 +169,16 @@ def deletar_despesa_view(request, id):
 
 
 def filtrar_despesa_view(request):
+    """
+    Utiliza a função pesquisar_despesas e o FiltrarDespesaForm para retornar um queryset,
+    contendo os resultados do filtro
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        HttpResponse: Resposta Http, formulário e a página .html a ser renderizada
+    """
     if request.method == 'POST':
         form = FiltrarDespesaForm(request.POST)
         if form.is_valid():

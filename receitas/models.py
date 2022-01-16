@@ -4,6 +4,12 @@ from contas.models import Contas
 
 
 class Receitas(models.Model):
+    """
+    Modelo para a tabela Receitas
+
+    Args:
+        models (Model): Contém todos os campos essenciais e comportamentos dos dados armazenados
+    """
 
     opcoes_tipo_receita = [
         ('', '--------'),

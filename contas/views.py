@@ -8,6 +8,17 @@ from datetime import date
 
 
 def paginator(request, object, number):
+    """
+    Função responsável por gerar a paginação nas views
+
+    Args:
+        request (HttpRequest): Uma requisição Http
+        object (Model): Uma queryset de um Model
+        number (Integer): Número de objetos por página
+
+    Returns:
+        QuerySet: Queryset dividido em vários setores, respectivos ao número de objetos por página (number)
+    """
     paginator = Paginator(object, number)
     page_number = request.GET.get('page')
     try:
@@ -18,6 +29,15 @@ def paginator(request, object, number):
 
 
 def pesquisar_contas(request):
+    """
+    Filtra o model Contas retornando um queryset contendo o que passou nos filtros
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        QuerySet: Contém o resultado dos filtros 
+    """
     contas = Contas.objects.all().order_by('-id')
     saldo_min = request.POST.get('saldo_min')
     saldo_max = request.POST.get('saldo_max')
@@ -42,6 +62,16 @@ def pesquisar_contas(request):
 
 
 def detalhes_conta_view(request, id):
+    """
+    Renderiza uma página contendo informações sobre uma conta, com suas despesas e receitas
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da conta a ser exibida
+
+    Returns:
+        HttpResponse: Resposta Http contendo o contexto e uma página .html a ser renderizada
+    """
     conta = Contas.objects.get(id=id)
     despesas = Despesas.objects.filter(conta=conta).order_by('dataPagamento')
     receitas = Receitas.objects.filter(conta=conta).order_by('dataRecebimento')
@@ -56,6 +86,15 @@ def detalhes_conta_view(request, id):
 
 
 def criar_conta_view(request):
+    """
+    Baseado no CriarContaForm, renderiza um formulário e salva as informações ao receber uma requisição POST
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        HttpResponse: Resposta Http contendo o formulário e uma página .html a ser renderizada
+    """
     if request.method == 'POST':
         form = CriarContaForm(request.POST)
         if form.is_valid():
@@ -70,6 +109,16 @@ def criar_conta_view(request):
 
 
 def atualizar_conta_view(request, id):
+    """
+    Atualiza uma Conta, capturando a instância através de um ID
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da conta a ser atualizada
+
+    Returns:
+        HttpResponse: Resposta Http contendo o formulário e uma página .html a ser renderizada
+    """
     conta = Contas.objects.get(id=id)
     if request.method == 'POST':
         form = CriarContaForm(request.POST, instance=conta)
@@ -86,6 +135,16 @@ def atualizar_conta_view(request, id):
 
 
 def deletar_conta_view(request, id):
+    """
+    Deleta uma conta, após exigir mais uma confirmação
+
+    Args:
+        request (HttpRequest): Requisição Http
+        id (Integer): Número referente ao id da conta a ser deletada
+
+    Returns:
+        HttpResponse: Resposta Http e a página .html a ser renderizada
+    """
     conta = Contas.objects.get(id=id)
     if request.method == "POST":
         conta.delete()
@@ -95,6 +154,15 @@ def deletar_conta_view(request, id):
 
 
 def transferencia_conta_view(request):
+    """
+    Transfere o saldo de uma conta a outra, contanto que as duas contas e o valor sejam lógicos
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        HttpResponse: Resposta Http, formulário e a página .html a ser renderizada
+    """
     if request.method == 'POST':
         form = TransferenciaForm(request.POST)
         if form.is_valid():
@@ -129,6 +197,16 @@ def transferencia_conta_view(request):
 
 
 def filtrar_contas_view(request):
+    """
+    Utiliza a função pesquisar_contas e o FiltrarContaForm para retornar um queryset,
+    contendo os resultados do filtro
+
+    Args:
+        request (HttpRequest): Requisição Http
+
+    Returns:
+        HttpResponse: Resposta Http, formulário e a página .html a ser renderizada
+    """
     if request.method == 'POST':
         form = FiltrarContaForm(request.POST)
         if form.is_valid():

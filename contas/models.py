@@ -2,6 +2,12 @@ from django.db import models
 
 
 class Contas(models.Model):
+    """
+    Modelo para a tabela Contas
+
+    Args:
+        models (Model): Contém todos os campos essenciais e comportamentos dos dados armazenados
+    """
 
     opcoes_tipo_conta = [
         ('', '--------'),

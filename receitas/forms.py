@@ -5,6 +5,12 @@ from django.db.utils import OperationalError
 
 
 class CriarReceitaForm(forms.ModelForm):
+    """
+    Formulário para criação de receitas
+
+    Args:
+        forms (ModelForm): Cria um formulário baseado em um model
+    """
     required_css_class = 'obrigatorio'
 
     class Meta:
@@ -23,6 +29,15 @@ class CriarReceitaForm(forms.ModelForm):
 
 
 class FiltrarReceitaForm(forms.Form):
+    """
+    Formulário para filtro de receitas, com todos os campos possíveis
+
+    Args:
+        forms (Form): Formulário padrão do Django Forms
+
+    Raises:
+        forms.ValidationError: Verifica se o valor máximo é superior ao valor mínimo
+    """
     valor_min = forms.FloatField(required=False, widget=forms.TextInput(
         attrs={"placeholder": "Valor mínimo"}))
     valor_max = forms.FloatField(required=False, widget=forms.TextInput(
