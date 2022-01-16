@@ -1,5 +1,5 @@
 from django.test import TestCase
-
+from django.urls import reverse
 from contas.models import Contas
 from .views import *
 from .models import Contas
@@ -31,3 +31,23 @@ class TestModelsContas(TestCase):
             'instituicaoFinanceira').verbose_name
         self.assertEqual(field_label, 'Instituição Financeira')
 
+
+class TestViewsContas(TestCase):
+    @classmethod
+    def setUpTestData(cls) -> None:
+        numero_contas = 13
+        for conta_id in range(numero_contas):
+            Contas.objects.create(
+                saldo=conta_id*10,
+                tipoConta='OU',
+                instituicaoFinanceira= f'Teste {conta_id}'
+            )
+
+    def test_detalhes_url_acessivel_por_nome(self):
+        response = self.client.get(reverse('contas:detalhe', kwargs={'id': 1}))
+        self.assertEqual(response.status_code, 200)
+        
+    def test_detalhes_view_usa_template_correta(self):
+        response = self.client.get(reverse('contas:detalhe', kwargs={'id': 1}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'detalhe_conta.html')
