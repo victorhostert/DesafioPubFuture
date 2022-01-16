@@ -98,30 +98,30 @@ def transferencia_conta_view(request):
     if request.method == 'POST':
         form = TransferenciaForm(request.POST)
         if form.is_valid():
-            conta1_id = form.cleaned_data['conta1']
-            conta1 = get_object_or_404(Contas, id=conta1_id)
-            conta2_id = form.cleaned_data['conta2']
-            conta2 = get_object_or_404(Contas, id=conta2_id)
+            conta_a_ser_debitada = form.cleaned_data['conta_a_ser_debitada']
+            conta_a_ser_creditada = form.cleaned_data['conta_a_ser_creditada']
             valor = form.cleaned_data['valor']
-            conta1.saldo -= valor
-            conta2.saldo += valor
+            conta_a_ser_debitada.saldo = float(conta_a_ser_debitada.saldo)
+            conta_a_ser_creditada.saldo = float(conta_a_ser_creditada.saldo)
+            conta_a_ser_debitada.saldo -= valor
+            conta_a_ser_creditada.saldo += valor
             Receitas.objects.create(
                 dataRecebimento=date.today(),
                 dataRecebimentoEsperado=date.today(),
                 valor=valor,
-                descricao=f'Transferência vinda de {conta1}',
+                descricao=f'Transferência vinda de {conta_a_ser_debitada}',
                 tipoReceita='OU',
-                conta=conta2
+                conta=conta_a_ser_creditada
             )
             Despesas.objects.create(
                 dataPagamento=date.today(),
                 dataPagamentoEsperado=date.today(),
                 valor=valor,
                 tipoDespesa='OU',
-                conta=conta1
+                conta=conta_a_ser_debitada
             )
-            conta1.save()
-            conta2.save()
+            conta_a_ser_debitada.save()
+            conta_a_ser_creditada.save()
             return redirect('homepage')
     else:
         form = TransferenciaForm()

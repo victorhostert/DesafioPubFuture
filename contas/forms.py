@@ -15,22 +15,21 @@ class CriarContaForm(forms.ModelForm):
 class TransferenciaForm(forms.Form):
     required_css_class = 'obrigatorio'
 
-    conta1 = forms.ModelChoiceField(Contas.objects.all())
-    conta2 = forms.ModelChoiceField(Contas.objects.all())
+    conta_a_ser_debitada = forms.ModelChoiceField(Contas.objects.all())
+    conta_a_ser_creditada = forms.ModelChoiceField(Contas.objects.all())
     valor = forms.FloatField(label='Valor a ser debitado')
 
-    def clean_conta2(self):
-        conta1 = self.cleaned_data.get('conta1')
-        conta2 = self.cleaned_data.get('conta2')
-        if conta1 == conta2:
+    def clean_conta_a_ser_creditada(self):
+        conta_a_ser_debitada = self.cleaned_data.get('conta_a_ser_debitada')
+        conta_a_ser_creditada = self.cleaned_data.get('conta_a_ser_creditada')
+        if conta_a_ser_debitada == conta_a_ser_creditada:
             raise forms.ValidationError('As contas devem ser diferentes!')
-        return conta2
+        return conta_a_ser_creditada
 
     def clean_valor(self):
-        conta1 = self.cleaned_data.get('conta1')
-        conta = Contas.objects.get(id=conta1)
+        conta_a_ser_debitada = self.cleaned_data.get('conta_a_ser_debitada')
         valor = self.cleaned_data.get('valor')
-        if conta.saldo < valor:
+        if conta_a_ser_debitada.saldo < valor:
             raise forms.ValidationError(
                 'O saldo da conta a ser debitada é muito baixo para este valor!')
         return valor
