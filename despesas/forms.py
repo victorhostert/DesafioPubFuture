@@ -37,7 +37,7 @@ class FiltrarDespesaForm(forms.Form):
         attrs={"placeholder": "Valor máximo"}))
     tipo = forms.ChoiceField(
         required=False, choices=Despesas.opcoes_tipo_despesa, label="Tipo")
-    conta = forms.ModelChoiceField(Contas.objects.all())
+    conta = forms.ModelChoiceField(Contas.objects.all(), required=False)
     data_pagamento_inicial = forms.DateField(
         required=False, widget=forms.TextInput(attrs={"placeholder": "DD/MM/AAAA"}))
     data_pagamento_final = forms.DateField(
