@@ -115,7 +115,7 @@ button:hover{
 .wrapper_main{
     min-height: calc(100vh - 80px);
 }
-.wrapper, .wrapper_homepage{
+.wrapper{
     min-height: 65%;
     max-width: 60%;
     background: var(--cor-bg-escuro);
@@ -128,11 +128,16 @@ button:hover{
     font-weight: normal;
 }
 .wrapper_homepage{
+    margin: 0 auto;
+    max-width: 60%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-content: center;
     justify-content: space-around;
+}
+.wrapper_homepage h1{
+    text-align: center;
 }
 .introducao{
     width: 40%;
@@ -255,7 +260,7 @@ button:hover{
 .formulario form *{
     margin: 5px;
     padding: 5px;
-    font-family: 'Exo 2', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 1.1em;
 }
 .formulario button{
@@ -308,12 +313,11 @@ button:hover{
     padding: 20px;
     text-align: center;
 }
-.atualizar_excluir{
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+.atualizar_excluir i{
+    border: 1px solid var(--cor-bg-claro);
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
 }
 .resultados_table{
     display: flex;
@@ -357,7 +361,7 @@ button:hover{
     margin: 0;
     margin-inline: 0;
 }
-.deletar_objeto_buttons button, form{
+.deletar_objeto_buttons button form{
     height: 100%;
     display: block;
 }

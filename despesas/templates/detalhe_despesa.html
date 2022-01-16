@@ -12,8 +12,8 @@
             <p>Esperado o pagamento em: {{despesa.dataPagamentoEsperado}}</p>
         {% endif %}
         <div class="atualizar_excluir">
-            <button><a href="href="{% url 'despesas:atualizar' despesa.id %}"">Atualizar</a></button>
-            <button><a href="{% url 'despesas:deletar' despesa.id %}">Excluir</a></button>
+            <a href="{% url 'despesas:atualizar' despesa.id %}"><i class="fas fa-pen-alt"></i></a>
+            <a href="{% url 'despesas:deletar' despesa.id %}"><i class="fas fa-trash-alt"></i></a>
         </div>
     </div>
 {% endblock %}

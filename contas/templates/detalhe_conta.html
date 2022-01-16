@@ -123,8 +123,8 @@
                 <button><a href="{% url 'despesas:cadastrar' conta.id %}">Cadastrar uma despesa</a></button>
             </div>
         <div class="atualizar_excluir">
-            <button><a href="{% url 'contas:atualizar' conta.id %}">Atualizar</a></button>
-            <button><a href="{% url 'contas:deletar' conta.id %}">Deletar</a></button>
+            <a href="{% url 'contas:atualizar' conta.id %}"><i class="fas fa-pen-alt"></i></a>
+            <a href="{% url 'contas:deletar' conta.id %}"><i class="fas fa-trash-alt"></i></a>
         </div>
     </div>
 </div>

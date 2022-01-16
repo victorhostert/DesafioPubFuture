@@ -15,8 +15,8 @@
             <p>Esperado o recebimento em: {{receita.dataRecebimentoEsperado}}</p>
         {% endif %}
         <div class="atualizar_excluir">
-            <button><a href="{% url 'receitas:atualizar' receita.id %}">Atualizar</a></button>
-            <button><a href="{% url 'receitas:deletar' receita.id %}">Excluir</a></button>
+            <a href="{% url 'receitas:atualizar' receita.id %}"><i class="fas fa-pen-alt"></i></a>
+            <a href="{% url 'receitas:deletar' receita.id %}"><i class="fas fa-trash-alt"></i></a>
         </div>
     </div>
 {% endblock %}
